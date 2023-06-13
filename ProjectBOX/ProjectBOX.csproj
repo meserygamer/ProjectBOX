@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Authorization\LoginUC\LoginIcon.png" />
     <None Remove="Fonts\Inter-Black.ttf" />
     <None Remove="Fonts\Inter-Bold.ttf" />
     <None Remove="Fonts\Inter-ExtraBold.ttf" />
@@ -18,9 +19,11 @@
     <None Remove="Fonts\Inter-SemiBold.ttf" />
     <None Remove="Fonts\Inter-Thin.ttf" />
     <None Remove="Pictures\AuthorizationBackground.png" />
+    <None Remove="Pictures\LoginIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Authorization\LoginUC\LoginIcon.png" />
     <Resource Include="Fonts\Inter-Black.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -49,6 +52,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Pictures\AuthorizationBackground.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pictures\LoginIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

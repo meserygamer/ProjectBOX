@@ -25,4 +25,44 @@ namespace ProjectBOX.Authorization.LoginUC
             InitializeComponent();
         }
     }
+    public class WaterMarkTextBox : TextBox
+    {
+        #region Fields
+
+        private const string _defaultWatermark = "None";
+
+        public static readonly DependencyProperty WatermarkTextProperty = DependencyProperty.Register("WatermarkText", typeof(string), typeof(WaterMarkTextBox), new UIPropertyMetadata(string.Empty, OnWatermarkTextChanged));
+
+        #endregion
+
+        #region Constructor(s)
+        public WaterMarkTextBox()
+          : this(_defaultWatermark)
+        {
+        }
+        public WaterMarkTextBox(string watermark)
+        {
+            WatermarkText = watermark;
+        }
+
+        #endregion
+
+        #region Properties
+
+        public string WatermarkText
+        {
+            get { return (string)GetValue(WatermarkTextProperty); }
+            set { SetValue(WatermarkTextProperty, value); }
+        }
+
+        #endregion
+
+        #region Methods
+
+        public static void OnWatermarkTextChanged(DependencyObject box, DependencyPropertyChangedEventArgs e)
+        {
+        }
+
+        #endregion
+    }
 }

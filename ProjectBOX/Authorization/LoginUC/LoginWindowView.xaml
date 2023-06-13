@@ -5,18 +5,77 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjectBOX.Authorization.LoginUC"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="630" d:DesignWidth="500" Background="White">
     <UserControl.Resources>
         <Style TargetType="TextBlock" x:Key ="StyleForMainText">
-            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
             <Setter Property="FontSize" Value="46"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="FontFamily" Value="Inter SemiBold"></Setter>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="StyleForHeaderOfFields">
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="FontFamily" Value="Inter"></Setter>
+        </Style>
+        <Style TargetType="local:WaterMarkTextBox"
+               x:Key="LoginField">
+            <Setter Property="Height" Value = "40"></Setter>
+            <Setter Property="Width" Value = "500"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType = "local:WaterMarkTextBox">
+                        <Border Height="{TemplateBinding Height}"
+                                Width="{TemplateBinding Width}"
+                                BorderThickness="0,0,0,2" BorderBrush="Gray"
+                                >
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/Authorization/LoginUC/LoginIcon.png"
+                                       Width ="25"
+                                       Height="25"
+                                       Margin="0 0 18 0"></Image>
+                                <ScrollViewer x:Name="PART_ContentHost"/>
+                                <TextBlock x:Name="WatermarkText" Text="{TemplateBinding WatermarkText}"
+                                           Foreground="Gray"
+                                           VerticalAlignment="Center"
+                                           Visibility="Collapsed"
+                                           IsHitTestVisible="False"/>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsKeyboardFocusWithin" Value="False"/>
+                                    <Condition Property="Text" Value=""/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Visibility" TargetName="WatermarkText" Value="Visible"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsKeyboardFocusWithin" Value="False"/>
+                                    <Condition Property="Text" Value="{x:Null}"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Visibility" TargetName="WatermarkText" Value="Visible"/>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </UserControl.Resources>
     <Grid>
         <StackPanel>
-            <TextBlock Text="Вход" Style ="{StaticResource ResourceKey=StyleForMainText}" FontFamily=""></TextBlock>
+            <TextBlock Text="Вход" Style ="{StaticResource ResourceKey=StyleForMainText}"></TextBlock>
+            <StackPanel Margin="0 87 0 0">
+                <StackPanel>
+                    <TextBlock Text="Логин" Style="{StaticResource ResourceKey=StyleForHeaderOfFields}"></TextBlock>
+                    <local:WaterMarkTextBox Style="{StaticResource LoginField}">
+                    </local:WaterMarkTextBox>
+                </StackPanel>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

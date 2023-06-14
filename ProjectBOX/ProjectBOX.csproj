@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Authorization\LoginUC\LoginIcon.png" />
     <None Remove="Fonts\Inter-Black.ttf" />
     <None Remove="Fonts\Inter-Bold.ttf" />
     <None Remove="Fonts\Inter-ExtraBold.ttf" />
@@ -20,10 +19,14 @@
     <None Remove="Fonts\Inter-Thin.ttf" />
     <None Remove="Pictures\AuthorizationBackground.png" />
     <None Remove="Pictures\LoginIcon.png" />
+    <None Remove="Pictures\PasswordIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Authorization\LoginUC\LoginIcon.png" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Fonts\Inter-Black.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -55,6 +58,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Pictures\LoginIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pictures\PasswordIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

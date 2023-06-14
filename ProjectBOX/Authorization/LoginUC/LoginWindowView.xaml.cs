@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xaml.Behaviors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -64,5 +65,46 @@ namespace ProjectBOX.Authorization.LoginUC
         }
 
         #endregion
+    }
+    public class PasswordBoxBehavior : Behavior<PasswordBox>
+    {
+        public static readonly DependencyProperty LenghPasswordProperty;
+        static PasswordBoxBehavior()
+        {
+            LenghPasswordProperty = DependencyProperty.Register("PasswordLengh", typeof(int?), typeof(PasswordBoxBehavior));
+        }
+
+        public int? LenghPassword
+        {
+            get { return (int?)GetValue(LenghPasswordProperty); }
+            set { SetValue(LenghPasswordProperty, value); }
+        }
+
+        protected override void OnAttached()
+        {
+            base.OnAttached();
+
+            // Присоединение обработчиков событий            
+            this.AssociatedObject.PasswordChanged += AssociatedObject_PasswordChanged;
+        }
+
+        protected override void OnDetaching()
+        {
+            base.OnDetaching();
+
+            // Удаление обработчиков событий
+            this.AssociatedObject.MouseLeftButtonDown -= AssociatedObject_PasswordChanged;
+        }
+
+        private void AssociatedObject_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if(((PasswordBox)sender).Password is null)
+            {
+                LenghPassword = null;
+                return;
+            }
+            LenghPassword = ((PasswordBox)sender).Password.Length;
+        }
+
     }
 }

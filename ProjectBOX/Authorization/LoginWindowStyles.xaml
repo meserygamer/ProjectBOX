@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:ProjectBOX.Authorization.LoginUC">
+                    xmlns:Watermarks="clr-namespace:ProjectBOX.Authorization">
     <Style TargetType="TextBlock" x:Key ="StyleForMainText">
         <Setter Property="Foreground" Value="Black"></Setter>
         <Setter Property="FontSize" Value="46"></Setter>
@@ -23,13 +23,13 @@
         <Setter Property="TextBox.VerticalAlignment" Value="Center"></Setter>
         <Setter Property="TextBox.VerticalContentAlignment" Value="Center"></Setter>
     </Style>
-    <Style TargetType="local:WaterMarkTextBox"
+    <Style TargetType="Watermarks:WaterMarkTextBox"
                x:Key="LoginField"
                BasedOn ="{StaticResource MainStyleForFields}">
         <Setter Property="WatermarkText" Value="Введите имя пользователя"></Setter>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType = "local:WaterMarkTextBox">
+                <ControlTemplate TargetType = "Watermarks:WaterMarkTextBox">
                     <Border Height="{TemplateBinding Height}"
                                 Width="{TemplateBinding Width}"
                                 BorderThickness="0,0,0,2" BorderBrush="Gray"

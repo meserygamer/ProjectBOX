@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:ProjectBOX"
              StartupUri="Authorization/AuthorizationView.xaml">
     <Application.Resources>
-        <ResourceDictionary Source="Authorization/LoginUC/LoginWindowStyles.xaml"/>
+        <ResourceDictionary Source="Authorization/LoginWindowStyles.xaml"/>
     </Application.Resources>
 </Application>

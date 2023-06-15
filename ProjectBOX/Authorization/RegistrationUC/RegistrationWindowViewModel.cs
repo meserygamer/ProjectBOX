@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace ProjectBOX.Authorization.RegistrationUC
 {
-    public class RegistrationWindowViewModel
+    public class RegistrationWindowViewModel : INotifyPropertyChanged
     {
         private int? _lenghPassword;
         private bool _keyBoardFocusStatusOnPassword;

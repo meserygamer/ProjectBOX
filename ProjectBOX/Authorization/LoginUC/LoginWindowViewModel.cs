@@ -13,16 +13,6 @@ namespace ProjectBOX.Authorization.LoginUC
 {
     class LoginWindowViewModel : INotifyPropertyChanged
     {
-        //private Visibility _passwordWatermark;
-        //public Visibility PasswordWatermark
-        //{
-        //    get => _passwordWatermark;
-        //    set
-        //    {
-        //        _passwordWatermark = value;
-        //        OnPropertyChanged("PasswordWatermark");
-        //    }
-        //}
         private int? _lenghPassword;
         private bool _keyBoardFocusStatus;
 

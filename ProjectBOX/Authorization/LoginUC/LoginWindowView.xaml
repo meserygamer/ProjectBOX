@@ -175,6 +175,9 @@
                         </i:Interaction.Behaviors>
                     </PasswordBox>
                     <Button Margin="0 177 0 0" Style="{StaticResource MainButton}">Войти</Button>
+                    <ContentControl Margin="0 15 0 0" HorizontalAlignment="Center">
+                        <Hyperlink>У вас нет аккаунта?</Hyperlink>
+                    </ContentControl>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

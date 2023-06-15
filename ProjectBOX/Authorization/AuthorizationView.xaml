@@ -6,22 +6,22 @@
         xmlns:local="clr-namespace:ProjectBOX.Authorization"
         xmlns:LoginWindow="clr-namespace:ProjectBOX.Authorization.LoginUC"
         mc:Ignorable="d"
-        Title="Authorization" Height="720" Width="1280">
+        Title="Authorization" Height="1080" Width="1920">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Pictures/AuthorizationBackground.png" Stretch="UniformToFill"></ImageBrush>
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width ="640"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height ="4*"></RowDefinition>
+            <RowDefinition Height ="720"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Border Grid.Column ="1" Grid.Row="1" Background="White" CornerRadius="10,10,10,10">
+        <Border Grid.Column ="1" Grid.Row="1" Background="White" CornerRadius="10,10,10,10" Height="720">
             <Border.Effect>
                 <DropShadowEffect Opacity="0.25" RenderingBias="Quality"/>
             </Border.Effect>

@@ -42,17 +42,66 @@
                         <ControlTemplate.Triggers>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding KeyBoardFocusStatus}" Value="False"></Condition>
+                                    <Condition Binding="{Binding KeyBoardFocusStatusOnPassword}" Value="False"></Condition>
                                     <Condition Binding = "{Binding LenghPassword}" Value="{x:Null}"></Condition>
                                 </MultiDataTrigger.Conditions>
                                 <Setter Property="Visibility" TargetName="WatermarkTextPassword" Value="Visible"/>
                             </MultiDataTrigger>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
-                                    <Condition Binding = "{Binding KeyBoardFocusStatus}" Value="False"></Condition>
+                                    <Condition Binding = "{Binding KeyBoardFocusStatusOnPassword}" Value="False"></Condition>
                                     <Condition Binding = "{Binding LenghPassword}" Value="0"></Condition>
                                 </MultiDataTrigger.Conditions>
                                 <Setter Property="Visibility" TargetName="WatermarkTextPassword" Value="Visible"/>
+                            </MultiDataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ConfirmPasswordField" BasedOn="{StaticResource MainStyleForFields}" TargetType="PasswordBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Border Height="{TemplateBinding Height}"
+                                Width="{TemplateBinding Width}"
+                                BorderThickness="0,0,0,2" BorderBrush="Gray" Background="{TemplateBinding Background}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width = "43"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="/Pictures/PasswordIcon.png"
+                                       Width ="25"
+                                       Height="25"
+                                       Margin="0 0 18 0"
+                                       Grid.Column="0"></Image>
+                                <ScrollViewer x:Name="PART_ContentHost"
+                                              Grid.Column = "1"/>
+                                <TextBlock x:Name="WatermarkTextConfirmPassword" Text="Повторите введенный пароль"
+                                           Foreground="Gray"
+                                           FontSize="{TemplateBinding FontSize}"
+                                           FontFamily="{TemplateBinding FontFamily}"
+                                           VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                           Visibility="Collapsed"
+                                           IsHitTestVisible="False"
+                                           Grid.Column="1"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding KeyBoardFocusStatusOnConfirmPassword}" Value="False"></Condition>
+                                    <Condition Binding = "{Binding LenghConfirmPassword}" Value="{x:Null}"></Condition>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Visibility" TargetName="WatermarkTextConfirmPassword" Value="Visible"/>
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding = "{Binding KeyBoardFocusStatusOnConfirmPassword}" Value="False"></Condition>
+                                    <Condition Binding = "{Binding LenghConfirmPassword}" Value="0"></Condition>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Visibility" TargetName="WatermarkTextConfirmPassword" Value="Visible"/>
                             </MultiDataTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -73,13 +122,13 @@
                     <TextBlock Text="Пароль" Style="{StaticResource ResourceKey=StyleForHeaderOfFields}" Margin="0,0,0,12"></TextBlock>
                     <PasswordBox Style="{StaticResource PasswordField}">
                         <i:Interaction.Behaviors>
-                            <Watermarks:PasswordBoxBehavior LenghPassword="{Binding LenghPassword, Mode=OneWayToSource}" KeyBoardFocus="{Binding KeyBoardFocusStatus, Mode=OneWayToSource}"></Watermarks:PasswordBoxBehavior>
+                            <Watermarks:PasswordBoxBehavior LenghPassword="{Binding LenghPassword, Mode=OneWayToSource}" KeyBoardFocus="{Binding KeyBoardFocusStatusOnPassword, Mode=OneWayToSource}"></Watermarks:PasswordBoxBehavior>
                         </i:Interaction.Behaviors>
                     </PasswordBox>
                     <TextBlock Text="Подтверждение пароля" Style="{StaticResource ResourceKey=StyleForHeaderOfFields}" Margin="0,39,0,12"></TextBlock>
-                    <PasswordBox Style="{StaticResource PasswordField}">
+                    <PasswordBox Style="{StaticResource ConfirmPasswordField}">
                         <i:Interaction.Behaviors>
-                            <Watermarks:PasswordBoxBehavior LenghPassword="{Binding LenghPassword, Mode=OneWayToSource}" KeyBoardFocus="{Binding KeyBoardFocusStatus, Mode=OneWayToSource}"></Watermarks:PasswordBoxBehavior>
+                            <Watermarks:PasswordBoxBehavior LenghPassword="{Binding LenghConfirmPassword, Mode=OneWayToSource}" KeyBoardFocus="{Binding KeyBoardFocusStatusOnConfirmPassword, Mode=OneWayToSource}"></Watermarks:PasswordBoxBehavior>
                         </i:Interaction.Behaviors>
                     </PasswordBox>
                     <Button Margin="0 60 0 0" Style="{StaticResource MainButton}">Зарегистрироваться</Button>

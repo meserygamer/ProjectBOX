@@ -11,7 +11,9 @@ namespace ProjectBOX.Authorization.RegistrationUC
     public class RegistrationWindowViewModel
     {
         private int? _lenghPassword;
-        private bool _keyBoardFocusStatus;
+        private bool _keyBoardFocusStatusOnPassword;
+        private int? _lenghConfirmPassword;
+        private bool _keyBoardFocusStatusOnConfirmPassword;
 
         public int? LenghPassword
         {
@@ -23,13 +25,33 @@ namespace ProjectBOX.Authorization.RegistrationUC
             }
         }
 
-        public bool KeyBoardFocusStatus
+        public bool KeyBoardFocusStatusOnPassword
         {
-            get => _keyBoardFocusStatus;
+            get => _keyBoardFocusStatusOnPassword;
             set
             {
-                _keyBoardFocusStatus = value;
-                OnPropertyChanged("KeyBoardFocusStatus");
+                _keyBoardFocusStatusOnPassword = value;
+                OnPropertyChanged("KeyBoardFocusStatusOnPassword");
+            }
+        }
+
+        public int? LenghConfirmPassword
+        {
+            get => _lenghConfirmPassword;
+            set
+            {
+                _lenghConfirmPassword = value;
+                OnPropertyChanged("LenghConfirmPassword");
+            }
+        }
+
+        public bool KeyBoardFocusStatusOnConfirmPassword
+        {
+            get => _keyBoardFocusStatusOnConfirmPassword;
+            set
+            {
+                _keyBoardFocusStatusOnConfirmPassword = value;
+                OnPropertyChanged("KeyBoardFocusStatusOnConfirmPassword");
             }
         }
 

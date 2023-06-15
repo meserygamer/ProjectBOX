@@ -1,14 +1,14 @@
-﻿<UserControl x:Class="ProjectBOX.Authorization.LoginUC.LoginWindowView"
+﻿<UserControl x:Class="ProjectBOX.Authorization.RegistrationUC.RegistrationWindowView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:local="clr-namespace:ProjectBOX.Authorization.LoginUC"
+             xmlns:local="clr-namespace:ProjectBOX.Authorization.RegistrationUC"
              mc:Ignorable="d" 
              d:DesignHeight="630" d:DesignWidth="500" Background="White">
     <UserControl.Resources>
-        <local:LoginWindowViewModel x:Key="DC"></local:LoginWindowViewModel>
+        <local:RegistrationWindowViewModel x:Key="DC"></local:RegistrationWindowViewModel>
         <Style TargetType="TextBlock" x:Key ="StyleForMainText">
             <Setter Property="Foreground" Value="Black"></Setter>
             <Setter Property="FontSize" Value="46"></Setter>

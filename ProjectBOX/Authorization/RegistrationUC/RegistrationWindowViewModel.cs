@@ -5,16 +5,18 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace ProjectBOX.Authorization.RegistrationUC
 {
-    public class RegistrationWindowViewModel
+    public class RegistrationWindowViewModel : DependencyObject
     {
         private int? _lenghPassword;
         private bool _keyBoardFocusStatusOnPassword;
         private int? _lenghConfirmPassword;
         private bool _keyBoardFocusStatusOnConfirmPassword;
-
+        
         public int? LenghPassword
         {
             get => _lenghPassword;
@@ -60,6 +62,17 @@ namespace ProjectBOX.Authorization.RegistrationUC
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+    }
+
+    public partial class RegistrationWindowView
+    {
+        public static readonly DependencyProperty HyperLinkClickProperty = DependencyProperty.Register("HyperLinkClick", typeof(RelayCommand), typeof(RegistrationWindowView));
+
+        public RelayCommand HyperLinkClick
+        {
+            get => (RelayCommand)GetValue(HyperLinkClickProperty);
+            set => SetValue(HyperLinkClickProperty, value);
         }
     }
 }

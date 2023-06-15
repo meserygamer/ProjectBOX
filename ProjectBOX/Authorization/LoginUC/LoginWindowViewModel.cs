@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectBOX.Authorization.RegistrationUC;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -52,4 +53,16 @@ namespace ProjectBOX.Authorization.LoginUC
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
+
+    public partial class LoginWindowView
+    {
+        public static readonly DependencyProperty HyperLinkClickProperty = DependencyProperty.Register("HyperLinkClick", typeof(RelayCommand), typeof(LoginWindowView));
+
+        public RelayCommand HyperLinkClick
+        {
+            get => (RelayCommand)GetValue(HyperLinkClickProperty);
+            set => SetValue(HyperLinkClickProperty, value);
+        }
+    }
+
 }

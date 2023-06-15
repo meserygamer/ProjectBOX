@@ -8,7 +8,34 @@
         xmlns:RegistrationWindow="clr-namespace:ProjectBOX.Authorization.RegistrationUC"
         mc:Ignorable="d"
         Title="Authorization" Height="1080" Width="1920">
-    <Grid>
+    <Window.Resources>
+        <local:AuthorizationViewModel x:Key ="DCA" CurrentScreen="Registration"></local:AuthorizationViewModel>
+        <Style x:Key = "StyleForLoginUC" TargetType="LoginWindow:LoginWindowView">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding CurrentScreen}" Value="Login">
+                    <Setter Property="Visibility" Value="Visible"></Setter>
+                    <Setter Property="IsHitTestVisible" Value="True"></Setter>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding CurrentScreen}" Value="Registration">
+                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                    <Setter Property="IsHitTestVisible" Value="False"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key = "StyleForRegistrationUC" TargetType="RegistrationWindow:RegistrationWindowView">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding CurrentScreen}" Value="Registration">
+                    <Setter Property="Visibility" Value="Visible"></Setter>
+                    <Setter Property="IsHitTestVisible" Value="True"></Setter>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding CurrentScreen}" Value="Login">
+                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                    <Setter Property="IsHitTestVisible" Value="False"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource DCA}">
         <Grid.Background>
             <ImageBrush ImageSource="/Pictures/AuthorizationBackground.png" Stretch="UniformToFill"></ImageBrush>
         </Grid.Background>
@@ -27,8 +54,14 @@
                 <DropShadowEffect Opacity="0.25" RenderingBias="Quality"/>
             </Border.Effect>
             <ContentControl Margin="70,51,70,42">
-                <!--<LoginWindow:LoginWindowView></LoginWindow:LoginWindowView>-->
-                <RegistrationWindow:RegistrationWindowView></RegistrationWindow:RegistrationWindowView>
+                <Grid>
+                    <LoginWindow:LoginWindowView HyperLinkClick="{Binding LoginSwap}"
+                                                 Style="{StaticResource StyleForLoginUC}">
+                    </LoginWindow:LoginWindowView>
+                    <RegistrationWindow:RegistrationWindowView HyperLinkClick="{Binding RegistrationSwap}"
+                                                               Style="{StaticResource StyleForRegistrationUC}">
+                    </RegistrationWindow:RegistrationWindowView>
+                </Grid>
             </ContentControl>
         </Border>
     </Grid>

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ProjectBOX.Authorization.LoginUC.LoginWindowView"
+﻿<UserControl x:Name="userControl" x:Class="ProjectBOX.Authorization.LoginUC.LoginWindowView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -76,9 +76,9 @@
                             <Watermarks:PasswordBoxBehavior LenghPassword="{Binding LenghPassword, Mode=OneWayToSource}" KeyBoardFocus="{Binding KeyBoardFocusStatus, Mode=OneWayToSource}"></Watermarks:PasswordBoxBehavior>
                         </i:Interaction.Behaviors>
                     </PasswordBox>
-                    <Button Margin="0 177 0 0" Style="{StaticResource MainButton}">Войти</Button>
+                    <Button Margin="0 175 0 0" Style="{StaticResource MainButton}">Войти</Button>
                     <ContentControl Margin="0 15 0 0" HorizontalAlignment="Center">
-                        <Hyperlink>У вас нет аккаунта?</Hyperlink>
+                        <Hyperlink Command="{Binding HyperLinkClick, ElementName=userControl}">У вас нет аккаунта?</Hyperlink>
                     </ContentControl>
                 </StackPanel>
             </StackPanel>

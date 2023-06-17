@@ -16,6 +16,8 @@ namespace ProjectBOX.Authorization.RegistrationUC
         private bool _keyBoardFocusStatusOnPassword;
         private int? _lenghConfirmPassword;
         private bool _keyBoardFocusStatusOnConfirmPassword;
+        private string _password;
+        private string _confirmPassword;
         
         public int? LenghPassword
         {
@@ -54,6 +56,26 @@ namespace ProjectBOX.Authorization.RegistrationUC
             {
                 _keyBoardFocusStatusOnConfirmPassword = value;
                 OnPropertyChanged("KeyBoardFocusStatusOnConfirmPassword");
+            }
+        }
+
+        public string Password
+        {
+            get => _password;
+            set
+            {
+                _password = value;
+                OnPropertyChanged("Password");
+            }
+        }
+
+        public string ConfirmPassword
+        {
+            get => _confirmPassword;
+            set
+            {
+                _confirmPassword = value;
+                OnPropertyChanged("ConfirmPassword");
             }
         }
 

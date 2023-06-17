@@ -122,13 +122,19 @@
                     <TextBlock Text="Пароль" Style="{StaticResource ResourceKey=StyleForHeaderOfFields}" Margin="0,0,0,12"></TextBlock>
                     <PasswordBox Style="{StaticResource PasswordField}">
                         <i:Interaction.Behaviors>
-                            <Watermarks:PasswordBoxBehavior LenghPassword="{Binding LenghPassword, Mode=OneWayToSource}" KeyBoardFocus="{Binding KeyBoardFocusStatusOnPassword, Mode=OneWayToSource}"></Watermarks:PasswordBoxBehavior>
+                            <Watermarks:PasswordBoxBehaviorForRegistration UserPasswordForRegistration="{Binding Password}"
+                                                                           LenghPassword="{Binding LenghPassword, Mode=OneWayToSource}"
+                                                                           KeyBoardFocus="{Binding KeyBoardFocusStatusOnPassword, Mode=OneWayToSource}">
+                            </Watermarks:PasswordBoxBehaviorForRegistration>
                         </i:Interaction.Behaviors>
                     </PasswordBox>
                     <TextBlock Text="Подтверждение пароля" Style="{StaticResource ResourceKey=StyleForHeaderOfFields}" Margin="0,39,0,12"></TextBlock>
                     <PasswordBox Style="{StaticResource ConfirmPasswordField}">
                         <i:Interaction.Behaviors>
-                            <Watermarks:PasswordBoxBehavior LenghPassword="{Binding LenghConfirmPassword, Mode=OneWayToSource}" KeyBoardFocus="{Binding KeyBoardFocusStatusOnConfirmPassword, Mode=OneWayToSource}"></Watermarks:PasswordBoxBehavior>
+                            <Watermarks:PasswordBoxBehaviorForRegistration UserPasswordForRegistration="{Binding ConfirmPassword}"
+                                                                           LenghPassword="{Binding LenghConfirmPassword, Mode=OneWayToSource}"
+                                                                           KeyBoardFocus="{Binding KeyBoardFocusStatusOnConfirmPassword, Mode=OneWayToSource}">
+                            </Watermarks:PasswordBoxBehaviorForRegistration>
                         </i:Interaction.Behaviors>
                     </PasswordBox>
                     <Button Margin="0 60 0 0" Style="{StaticResource MainButton}">Зарегистрироваться</Button>

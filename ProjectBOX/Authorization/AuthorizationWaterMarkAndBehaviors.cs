@@ -51,23 +51,68 @@ namespace ProjectBOX.Authorization
 
         #endregion
     }
-    public class PasswordBoxBehavior : Behavior<PasswordBox>
-    {
-        public static readonly DependencyProperty LenghPasswordProperty;
-        public static readonly DependencyProperty SecurePasswordProperty;
-        public static readonly DependencyProperty KeyBoardFocusProperty;
 
-        static PasswordBoxBehavior()
+    public class PasswordBoxBehaviorForLogin : PasswordBoxBehavior
+    {
+        public static readonly DependencyProperty SecurePasswordProperty;
+
+        static PasswordBoxBehaviorForLogin()
         {
-            KeyBoardFocusProperty = DependencyProperty.Register("KeyBoardFocus", typeof(bool), typeof(PasswordBoxBehavior));
-            LenghPasswordProperty = DependencyProperty.Register("LenghPassword", typeof(int?), typeof(PasswordBoxBehavior));
-            SecurePasswordProperty = DependencyProperty.Register("SecurePassword", typeof(string), typeof(PasswordBoxBehavior));
+            SecurePasswordProperty = DependencyProperty.Register("SecurePassword", typeof(string), typeof(PasswordBoxBehaviorForLogin));
         }
 
         public string SecurePassword
         {
             get { return (string)GetValue(SecurePasswordProperty); }
             set { SetValue(SecurePasswordProperty, value); }
+        }
+
+        protected override void AssociatedObject_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            base.AssociatedObject_PasswordChanged(sender, e);
+            SecurePassword = CalculateSecurePassword(AssociatedObject.Password);
+        }
+
+        protected string CalculateSecurePassword(string CurrentPassword)
+        {
+            using (SHA256 hash = SHA256.Create())
+            {
+                return Convert.ToHexString(hash.ComputeHash(Encoding.UTF8.GetBytes(CurrentPassword)));
+            }
+        }
+    }
+
+    public class PasswordBoxBehaviorForRegistration : PasswordBoxBehavior
+    {
+        public static readonly DependencyProperty UserPasswordForRegistrationProperty;
+
+        static PasswordBoxBehaviorForRegistration()
+        {
+            UserPasswordForRegistrationProperty = DependencyProperty.Register("UserPasswordForRegistration", typeof(string), typeof(PasswordBoxBehaviorForRegistration));
+        }
+
+        public string UserPasswordForRegistration
+        {
+            get { return (string)GetValue(UserPasswordForRegistrationProperty); }
+            set { SetValue(UserPasswordForRegistrationProperty, value); }
+        }
+
+        protected override void AssociatedObject_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            base.AssociatedObject_PasswordChanged(sender, e);
+            UserPasswordForRegistration = AssociatedObject.Password;
+        }
+    }
+
+    public class PasswordBoxBehavior : Behavior<PasswordBox>
+    {
+        public static readonly DependencyProperty LenghPasswordProperty;
+        public static readonly DependencyProperty KeyBoardFocusProperty;
+
+        static PasswordBoxBehavior()
+        {
+            KeyBoardFocusProperty = DependencyProperty.Register("KeyBoardFocus", typeof(bool), typeof(PasswordBoxBehavior));
+            LenghPasswordProperty = DependencyProperty.Register("LenghPassword", typeof(int?), typeof(PasswordBoxBehavior));
         }
 
         public int? LenghPassword
@@ -100,14 +145,14 @@ namespace ProjectBOX.Authorization
             this.AssociatedObject.IsKeyboardFocusWithinChanged -= AssociatedObject_IsKeyboardFocusWithinChanged;
         }
 
-        private void AssociatedObject_IsKeyboardFocusWithinChanged(object sender, DependencyPropertyChangedEventArgs e)
+        protected void AssociatedObject_IsKeyboardFocusWithinChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             KeyBoardFocus = this.AssociatedObject.IsKeyboardFocusWithin;
         }
 
-        private void AssociatedObject_PasswordChanged(object sender, RoutedEventArgs e)
+        protected virtual void AssociatedObject_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            SecurePassword = CalculateSecurePassword(AssociatedObject.Password);
+            
             LenghPassword = CalculateLenghPassword(AssociatedObject.Password);
         }
 
@@ -116,19 +161,11 @@ namespace ProjectBOX.Authorization
             base.OnPropertyChanged(e);
         }
 
-        private int? CalculateLenghPassword(string CurrentPassword)
+        protected int? CalculateLenghPassword(string CurrentPassword)
         {
             if (CurrentPassword is null)
                 return null;
             return CurrentPassword.Length;
-        }
-
-        private string CalculateSecurePassword(string CurrentPassword)
-        {
-            using (SHA256 hash = SHA256.Create())
-            {
-                return Convert.ToHexString(hash.ComputeHash(Encoding.UTF8.GetBytes(CurrentPassword)));
-            }
         }
 
     }

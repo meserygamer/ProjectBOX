@@ -73,7 +73,10 @@
                     <TextBlock Text="Пароль" Style="{StaticResource ResourceKey=StyleForHeaderOfFields}" Margin="0,0,0,12"></TextBlock>
                     <PasswordBox Style="{StaticResource PasswordField}">
                         <i:Interaction.Behaviors>
-                            <Watermarks:PasswordBoxBehavior SecurePassword="{Binding SecurePassword, Mode=OneWayToSource}" LenghPassword="{Binding LenghPassword, Mode=OneWayToSource}" KeyBoardFocus="{Binding KeyBoardFocusStatus, Mode=OneWayToSource}"></Watermarks:PasswordBoxBehavior>
+                            <Watermarks:PasswordBoxBehaviorForLogin SecurePassword="{Binding SecurePassword, Mode=OneWayToSource}"
+                                                                    LenghPassword="{Binding LenghPassword, Mode=OneWayToSource}"
+                                                                    KeyBoardFocus="{Binding KeyBoardFocusStatus, Mode=OneWayToSource}">
+                            </Watermarks:PasswordBoxBehaviorForLogin>
                         </i:Interaction.Behaviors>
                     </PasswordBox>
                     <Button Command="{Binding LoginCommand}" Margin="0 175 0 0" Style="{StaticResource MainButton}">Войти</Button>

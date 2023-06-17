@@ -66,14 +66,14 @@
             <StackPanel Margin="0 87 0 0" >
                 <StackPanel>
                     <TextBlock Text="Логин" Style="{StaticResource ResourceKey=StyleForHeaderOfFields}" Margin="0,0,0,12"></TextBlock>
-                    <Watermarks:WaterMarkTextBox Style="{StaticResource LoginField}">
+                    <Watermarks:WaterMarkTextBox Text="{Binding Login, Mode=TwoWay}" Style="{StaticResource LoginField}">
                     </Watermarks:WaterMarkTextBox>
                 </StackPanel>
                 <StackPanel Margin = "0 39 0 0">
                     <TextBlock Text="Пароль" Style="{StaticResource ResourceKey=StyleForHeaderOfFields}" Margin="0,0,0,12"></TextBlock>
                     <PasswordBox Style="{StaticResource PasswordField}">
                         <i:Interaction.Behaviors>
-                            <Watermarks:PasswordBoxBehavior LenghPassword="{Binding LenghPassword, Mode=OneWayToSource}" KeyBoardFocus="{Binding KeyBoardFocusStatus, Mode=OneWayToSource}"></Watermarks:PasswordBoxBehavior>
+                            <Watermarks:PasswordBoxBehavior SecurePassword="{Binding SecurePassword, Mode=OneWayToSource}" LenghPassword="{Binding LenghPassword, Mode=OneWayToSource}" KeyBoardFocus="{Binding KeyBoardFocusStatus, Mode=OneWayToSource}"></Watermarks:PasswordBoxBehavior>
                         </i:Interaction.Behaviors>
                     </PasswordBox>
                     <Button Margin="0 175 0 0" Style="{StaticResource MainButton}">Войти</Button>

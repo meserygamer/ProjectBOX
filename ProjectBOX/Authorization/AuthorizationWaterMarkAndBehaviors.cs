@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
+using System.Security.Policy;
+using System.Security.Cryptography;
 
 namespace ProjectBOX.Authorization
 {
@@ -52,12 +54,20 @@ namespace ProjectBOX.Authorization
     public class PasswordBoxBehavior : Behavior<PasswordBox>
     {
         public static readonly DependencyProperty LenghPasswordProperty;
+        public static readonly DependencyProperty SecurePasswordProperty;
         public static readonly DependencyProperty KeyBoardFocusProperty;
 
         static PasswordBoxBehavior()
         {
             KeyBoardFocusProperty = DependencyProperty.Register("KeyBoardFocus", typeof(bool), typeof(PasswordBoxBehavior));
             LenghPasswordProperty = DependencyProperty.Register("LenghPassword", typeof(int?), typeof(PasswordBoxBehavior));
+            SecurePasswordProperty = DependencyProperty.Register("SecurePassword", typeof(string), typeof(PasswordBoxBehavior));
+        }
+
+        public string SecurePassword
+        {
+            get { return (string)GetValue(SecurePasswordProperty); }
+            set { SetValue(SecurePasswordProperty, value); }
         }
 
         public int? LenghPassword
@@ -97,17 +107,29 @@ namespace ProjectBOX.Authorization
 
         private void AssociatedObject_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if (AssociatedObject.Password is null)
-            {
-                LenghPassword = null;
-                return;
-            }
-            LenghPassword = AssociatedObject.Password.Length;
+            SecurePassword = CalculateSecurePassword(AssociatedObject.Password);
+            LenghPassword = CalculateLenghPassword(AssociatedObject.Password);
         }
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
         }
+
+        private int? CalculateLenghPassword(string CurrentPassword)
+        {
+            if (CurrentPassword is null)
+                return null;
+            return CurrentPassword.Length;
+        }
+
+        private string CalculateSecurePassword(string CurrentPassword)
+        {
+            using (SHA256 hash = SHA256.Create())
+            {
+                return Convert.ToHexString(hash.ComputeHash(Encoding.UTF8.GetBytes(CurrentPassword)));
+            }
+        }
+
     }
 }

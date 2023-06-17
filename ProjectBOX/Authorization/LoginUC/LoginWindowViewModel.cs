@@ -15,6 +15,41 @@ namespace ProjectBOX.Authorization.LoginUC
     {
         private int? _lenghPassword;
         private bool _keyBoardFocusStatus;
+        private string _securePassword;
+        private string _login;
+        private RelayCommand _loginCommand;
+
+        public RelayCommand RelayCommand
+        {
+            get
+            {
+                return _loginCommand ??
+                  (_loginCommand = new RelayCommand(obj =>
+                  {
+                      
+                  }));
+            }
+        }
+
+        public string Login
+        {
+            get => _login;
+            set
+            {
+                _login = value;
+                OnPropertyChanged("Login");
+            }
+        }
+
+        public string SecurePassword
+        {
+            get => _securePassword;
+            set
+            {
+                _securePassword = value;
+                OnPropertyChanged("SecurePassword");
+            }
+        }
 
         public int? LenghPassword
         {

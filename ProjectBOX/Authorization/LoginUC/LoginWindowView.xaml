@@ -76,7 +76,7 @@
                             <Watermarks:PasswordBoxBehavior SecurePassword="{Binding SecurePassword, Mode=OneWayToSource}" LenghPassword="{Binding LenghPassword, Mode=OneWayToSource}" KeyBoardFocus="{Binding KeyBoardFocusStatus, Mode=OneWayToSource}"></Watermarks:PasswordBoxBehavior>
                         </i:Interaction.Behaviors>
                     </PasswordBox>
-                    <Button Margin="0 175 0 0" Style="{StaticResource MainButton}">Войти</Button>
+                    <Button Command="{Binding LoginCommand}" Margin="0 175 0 0" Style="{StaticResource MainButton}">Войти</Button>
                     <ContentControl Margin="0 15 0 0" HorizontalAlignment="Center">
                         <Hyperlink Command="{Binding HyperLinkClick, ElementName=userControl}">У вас нет аккаунта?</Hyperlink>
                     </ContentControl>

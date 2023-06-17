@@ -19,14 +19,18 @@ namespace ProjectBOX.Authorization.LoginUC
         private string _login;
         private RelayCommand _loginCommand;
 
-        public RelayCommand RelayCommand
+        public RelayCommand LoginCommand
         {
             get
             {
                 return _loginCommand ??
                   (_loginCommand = new RelayCommand(obj =>
                   {
-                      
+                      if((new AuthorizationData(_login, _securePassword)).Authorization().CheckUser())
+                      {
+                          Application.Current.Resources.Add("LoginOfCurrentUser", _login);
+                          //закрытие окна и переход далее
+                      }
                   }));
             }
         }

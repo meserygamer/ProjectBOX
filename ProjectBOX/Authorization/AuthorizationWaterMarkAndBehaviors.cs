@@ -85,6 +85,7 @@ namespace ProjectBOX.Authorization
     public class PasswordBoxBehaviorForRegistration : PasswordBoxBehavior
     {
         public static readonly DependencyProperty UserPasswordForRegistrationProperty;
+        private bool _skipUpdate;
 
         static PasswordBoxBehaviorForRegistration()
         {
@@ -97,10 +98,27 @@ namespace ProjectBOX.Authorization
             set { SetValue(UserPasswordForRegistrationProperty, value); }
         }
 
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+
+            if (e.Property == UserPasswordForRegistrationProperty)
+            {
+                if (!_skipUpdate)
+                {
+                    _skipUpdate = true;
+                    AssociatedObject.Password = e.NewValue as string;
+                    _skipUpdate = false;
+                }
+            }
+        }
+
         protected override void AssociatedObject_PasswordChanged(object sender, RoutedEventArgs e)
         {
             base.AssociatedObject_PasswordChanged(sender, e);
+            _skipUpdate = true;
             UserPasswordForRegistration = AssociatedObject.Password;
+            _skipUpdate = false;
         }
     }
 

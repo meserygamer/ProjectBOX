@@ -115,14 +115,14 @@
             <StackPanel Margin="0 87 0 0" >
                 <StackPanel>
                     <TextBlock Text="Логин" Style="{StaticResource ResourceKey=StyleForHeaderOfFields}" Margin="0,0,0,12"></TextBlock>
-                    <Watermarks:WaterMarkTextBox Style="{StaticResource LoginField}">
+                    <Watermarks:WaterMarkTextBox Text="{Binding Login, Mode=TwoWay}" Style="{StaticResource LoginField}">
                     </Watermarks:WaterMarkTextBox>
                 </StackPanel>
                 <StackPanel Margin = "0 39 0 0">
                     <TextBlock Text="Пароль" Style="{StaticResource ResourceKey=StyleForHeaderOfFields}" Margin="0,0,0,12"></TextBlock>
                     <PasswordBox Style="{StaticResource PasswordField}">
                         <i:Interaction.Behaviors>
-                            <Watermarks:PasswordBoxBehaviorForRegistration UserPasswordForRegistration="{Binding Password}"
+                            <Watermarks:PasswordBoxBehaviorForRegistration UserPasswordForRegistration="{Binding Password, Mode=TwoWay}"
                                                                            LenghPassword="{Binding LenghPassword, Mode=OneWayToSource}"
                                                                            KeyBoardFocus="{Binding KeyBoardFocusStatusOnPassword, Mode=OneWayToSource}">
                             </Watermarks:PasswordBoxBehaviorForRegistration>
@@ -131,13 +131,13 @@
                     <TextBlock Text="Подтверждение пароля" Style="{StaticResource ResourceKey=StyleForHeaderOfFields}" Margin="0,39,0,12"></TextBlock>
                     <PasswordBox Style="{StaticResource ConfirmPasswordField}">
                         <i:Interaction.Behaviors>
-                            <Watermarks:PasswordBoxBehaviorForRegistration UserPasswordForRegistration="{Binding ConfirmPassword}"
+                            <Watermarks:PasswordBoxBehaviorForRegistration UserPasswordForRegistration="{Binding ConfirmPassword, Mode=TwoWay}"
                                                                            LenghPassword="{Binding LenghConfirmPassword, Mode=OneWayToSource}"
                                                                            KeyBoardFocus="{Binding KeyBoardFocusStatusOnConfirmPassword, Mode=OneWayToSource}">
                             </Watermarks:PasswordBoxBehaviorForRegistration>
                         </i:Interaction.Behaviors>
                     </PasswordBox>
-                    <Button Margin="0 60 0 0" Style="{StaticResource MainButton}">Зарегистрироваться</Button>
+                    <Button Margin="0 60 0 0" Command="{Binding RegistrationCommand}" Style="{StaticResource MainButton}">Зарегистрироваться</Button>
                     <ContentControl Margin="0 15 0 0" HorizontalAlignment="Center">
                         <Hyperlink Command="{Binding HyperLinkClick, ElementName=userControl}">У вас есть аккаунт?</Hyperlink>
                     </ContentControl>

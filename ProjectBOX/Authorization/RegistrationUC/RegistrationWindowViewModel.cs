@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectBOX.Authorization.LoginUC;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -16,8 +17,10 @@ namespace ProjectBOX.Authorization.RegistrationUC
         private bool _keyBoardFocusStatusOnPassword;
         private int? _lenghConfirmPassword;
         private bool _keyBoardFocusStatusOnConfirmPassword;
+        private string _login;
         private string _password;
         private string _confirmPassword;
+        private RelayCommand _registrationCommand;
         
         public int? LenghPassword
         {
@@ -59,6 +62,16 @@ namespace ProjectBOX.Authorization.RegistrationUC
             }
         }
 
+        public string Login
+        {
+            get => _login;
+            set
+            {
+                _login = value;
+                OnPropertyChanged("Login");
+            }
+        }
+
         public string Password
         {
             get => _password;
@@ -77,6 +90,50 @@ namespace ProjectBOX.Authorization.RegistrationUC
                 _confirmPassword = value;
                 OnPropertyChanged("ConfirmPassword");
             }
+        }
+
+        public RelayCommand RegistrationCommand
+        {
+            get
+            {
+                return _registrationCommand ??
+                  (_registrationCommand = new RelayCommand(obj =>
+                  {
+                      Validator RegistrationValidator = (new RegistrationData(_login, _password, _confirmPassword)).Validator();
+                      if(!RegistrationValidator.CheckLoginOnValid().Validate())
+                      {
+                          MessageBox.Show("Введенный логин не соответсвует требованиям! Логин должен состоять из латинских букв или цифр," +
+                              " а также быть не короче 6 символов");
+                          return;
+                      }
+                      if(!RegistrationValidator.CheckOnLoginAvailability().Validate())
+                      {
+                          MessageBox.Show("Введенный логин не занят другим пользователем!");
+                          return;
+                      }
+                      if (!RegistrationValidator.CheckPasswordOnValid().Validate())
+                      {
+                          MessageBox.Show("Введенный пароль не соответсвует требованиям! Пароль должен состоять из латинских букв и цифр," +
+                              " иметь в своем составе минимум 1 цифру и 1 заглавную букву, а также быть не короче 6 символов");
+                          return;
+                      }
+                      if (!RegistrationValidator.CheckPasswordsOnEquals().Validate())
+                      {
+                          MessageBox.Show("Введенные пароли не идентичны!");
+                          return;
+                      }
+                      //Здесь должен быть метод внесения пользователя в базу данных
+                      CleanAllFields();
+                      MessageBox.Show("Аккаунт был успешно зарегистрирован! Теперь вы можете авторизироваться в системе");
+                  }));
+            }
+        }
+
+        private void CleanAllFields()
+        {
+            Login = "";
+            Password = "";
+            ConfirmPassword = "";
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

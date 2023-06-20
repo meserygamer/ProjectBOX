@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectBOX.ItemsWindow"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:UserAreaUC="clr-namespace:ProjectBOX.ItemsWindow.UserAreaUC"
         xmlns:SearchBar="clr-namespace:ProjectBOX.ItemsWindow.SearchFieldUC"
         mc:Ignorable="d"
@@ -76,6 +78,36 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="{x:Type ListViewItem}"
+               x:Key="CategoryListViewItemStyle">
+            <Setter Property="Height" Value="100"></Setter>
+            <Setter Property="FontFamily" Value = "Inter"></Setter>
+            <Setter Property="FontSize" Value = "24"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                        <Border x:Name="CategoryItem"
+                                Height="{TemplateBinding Height}"
+                                Width="{TemplateBinding Width}"
+                                Background="White">
+                            <!--<ContentPresenter Margin="30,0,0,0"
+                                              HorizontalAlignment="Left"
+                                              VerticalAlignment="Center"></ContentPresenter>-->
+                            <TextBlock Text="Склад"
+                                       Margin="30,0,0,0"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"></TextBlock>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="BorderThickness" TargetName="CategoryItem" Value="10 0 0 0"/>
+                                <Setter Property="BorderBrush" TargetName="CategoryItem" Value="#36638D"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <!--Главный грид, разделяет левую и правые части окна-->
     <Grid>
@@ -109,7 +141,17 @@
                           Stroke="Black"
                           HorizontalAlignment="Center"/>
                     <ScrollViewer Grid.Row="2">
-                        <ListView d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Row="2"></ListView>
+                        <ListView BorderThickness="0"
+                                  SelectionMode="Single"
+                                  ItemContainerStyle="{StaticResource CategoryListViewItemStyle}"
+                                  SelectedItem="{Binding Category}">
+                            <TextBlock>LG Nexus 5X</TextBlock>
+                            <TextBlock>Huawei Nexus 6P</TextBlock>
+                            <TextBlock>iPhone 6S</TextBlock>
+                            <TextBlock>iPhone 6S Plus</TextBlock>
+                            <TextBlock>Аsus Zenphone 2</TextBlock>
+                            <TextBlock>Microsoft Lumia 950</TextBlock>
+                        </ListView>
                     </ScrollViewer>
                     <Button Grid.Row="3"
                             Margin="0,13,0,0"

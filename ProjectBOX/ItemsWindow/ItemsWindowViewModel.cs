@@ -14,6 +14,7 @@ namespace ProjectBOX.ItemsWindow
     {
         private bool _userChoseSeeAllObject;
         private RelayCommand _userClickOnSeeAllObjectButton;
+        private object? _category;
 
         public RelayCommand UserClickOnSeeAllObjectButton
         {
@@ -34,7 +35,31 @@ namespace ProjectBOX.ItemsWindow
             {
                 _userChoseSeeAllObject = value;
                 OnPropertyChanged("UserChoseSeeAllObject");
+                ClearSelectedCategory();
             }
+        }
+
+        public object? Category
+        {
+            get => _category;
+            set
+            {
+                _category = value;
+                OnPropertyChanged("Category");
+                ClearButtonSeeallObject();
+            }
+        }
+
+        private void ClearSelectedCategory()
+        {
+            _category = null;
+            OnPropertyChanged("Category");
+        }
+
+        private void ClearButtonSeeallObject()
+        {
+            _userChoseSeeAllObject = false;
+            OnPropertyChanged("UserChoseSeeAllObject");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

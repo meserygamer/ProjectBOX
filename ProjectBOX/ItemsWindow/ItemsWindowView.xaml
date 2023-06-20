@@ -11,7 +11,14 @@
     <Window.Background>
         <ImageBrush ImageSource="/Pictures/AuthorizationBackground.png"/>
     </Window.Background>
+    <Window.DataContext>
+        <local:ItemsWindowViewModel></local:ItemsWindowViewModel>
+    </Window.DataContext>
     <Window.Resources>
+        <Style x:Key="ItemsCategoryFont">
+            <Setter Property="TextBlock.FontFamily" Value = "Inter"></Setter>
+            <Setter Property="TextBlock.FontSize" Value = "24"></Setter>
+        </Style>
         <Style x:Key="CatygoryBackgroundBorderStyle" TargetType="Border">
             <Setter Property="Background" Value = "White"></Setter>
             <Setter Property="CornerRadius" Value = "0 10 0 0"></Setter>
@@ -42,6 +49,33 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="ShowAllObjectsButtonStyle"
+               TargetType="Button"
+               BasedOn="{StaticResource ItemsCategoryFont}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ShowAllObjectsButtonBorder"
+                                Height="{TemplateBinding Height}"
+                                Width="{TemplateBinding Width}"
+                                Background="White">
+                            <ContentPresenter Margin="30,0,0,0"
+                                              HorizontalAlignment="Left"
+                                              VerticalAlignment="Center"></ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <DataTrigger Binding="{Binding UserChoseSeeAllObject}"
+                                         Value="True">
+                                <DataTrigger.Setters>
+                                    <Setter Property="BorderThickness" TargetName="ShowAllObjectsButtonBorder" Value="10 0 0 0"/>
+                                    <Setter Property="BorderBrush" TargetName="ShowAllObjectsButtonBorder" Value="#36638D"/>
+                                </DataTrigger.Setters>
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <!--Главный грид, разделяет левую и правые части окна-->
     <Grid>
@@ -66,7 +100,8 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition Height="113"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Button ></Button>
+                    <Button Style ="{StaticResource ShowAllObjectsButtonStyle}"
+                            Command="{Binding UserClickOnSeeAllObjectButton}">Все предметы</Button>
                     <Line X2="375"
                           Grid.Row="1"
                           VerticalAlignment="Center"
@@ -74,7 +109,7 @@
                           Stroke="Black"
                           HorizontalAlignment="Center"/>
                     <ScrollViewer Grid.Row="2">
-                        <ListView></ListView>
+                        <ListView d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Row="2"></ListView>
                     </ScrollViewer>
                     <Button Grid.Row="3"
                             Margin="0,13,0,0"

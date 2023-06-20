@@ -20,6 +20,8 @@
     <None Remove="Pictures\AuthorizationBackground.png" />
     <None Remove="Pictures\LoginIcon.png" />
     <None Remove="Pictures\PasswordIcon.png" />
+    <None Remove="Pictures\SearchIcon.png" />
+    <None Remove="Pictures\SettingsIcon.png" />
     <None Remove="Pictures\UserAreaImg.png" />
   </ItemGroup>
 
@@ -63,6 +65,10 @@
     </Resource>
     <Resource Include="Pictures\PasswordIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pictures\SearchIcon.png" />
+    <Resource Include="Pictures\SettingsIcon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Pictures\UserAreaImg.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

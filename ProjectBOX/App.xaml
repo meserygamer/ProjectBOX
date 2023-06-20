@@ -10,6 +10,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ItemsWindow/UserAreaUC/UserAreaStyles.xaml"/>
                 <ResourceDictionary Source="Authorization/LoginWindowStyles.xaml"/>
+                <ResourceDictionary Source="/ItemsWindow/SearchFieldUC/SearchFieldUCStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -1,0 +1,29 @@
+﻿<UserControl x:Name="userControl" x:Class="ProjectBOX.ItemsWindow.SearchFieldUC.SearchFieldUCView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProjectBOX.ItemsWindow.SearchFieldUC"
+             mc:Ignorable="d"
+             xmlns:Watermarks="clr-namespace:ProjectBOX.Authorization"
+             d:DesignHeight="100" d:DesignWidth="1040">
+    <Grid DataContext="{Binding ElementName=userControl, Mode=OneWay}">
+        <Grid.Effect>
+            <DropShadowEffect BlurRadius="4" Opacity="0.25" RenderingBias="Quality"/>
+        </Grid.Effect>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="840"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Watermarks:WaterMarkTextBox Style="{StaticResource InputField}"
+                                     WatermarkText="Введите название предмета для поиска..."
+                                     Text="{Binding SearchQuery, Mode=TwoWay}"/>
+        <Button Grid.Column="1"
+                Style="{StaticResource SettingsButton}"
+                Command="{Binding ClickOnSettingsButton, Mode=TwoWay}"></Button>
+        <Button Grid.Column="2"
+                Style="{StaticResource SearchButton}"
+                Command="{Binding ClickOnSettingsButton, Mode=TwoWay}"></Button>
+    </Grid>
+</UserControl>

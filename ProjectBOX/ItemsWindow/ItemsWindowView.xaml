@@ -108,6 +108,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="{x:Type TextBlock}" x:Key="DataGridCellTextWrap">
+            <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+        </Style>
     </Window.Resources>
     <!--Главный грид, разделяет левую и правые части окна-->
     <Grid>
@@ -204,7 +207,18 @@
                                 HorizontalAlignment="Left"
                                 Style="{StaticResource StyleForAllButtonOnItemWindow}">Переместить предметы</Button>
                         <!--таблица со списком предметов-->
-                        <DataGrid Grid.Row="2" BorderThickness="0"></DataGrid>
+                        <DataGrid x:Name="MainGrid" Grid.Row="2" BorderThickness="0" AutoGenerateColumns = "False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Номер предмета" Binding="{Binding Path=ObjectId}" Width="1*"/>
+                                <DataGridTextColumn Header="Имя предмета" Binding="{Binding Path=ObjectName}" Width="1*"/>
+                                <DataGridTextColumn Header="Описание предмета" Binding="{Binding Path=ObjectDataDescription}" Width="1*" ElementStyle="{StaticResource DataGridCellTextWrap}"/>
+                                <DataGridTextColumn Header="Имя контейнера" Binding="{Binding Path=ContainerName}" Width="1*"/>
+                                <DataGridTextColumn Header="Описание перемещения" Binding="{Binding Path=HistoryOfChangesObjectLocationDescription}" ElementStyle="{StaticResource DataGridCellTextWrap}" Width="1*"/>
+                                <DataGridTextColumn Header="Автор последнего перемещения" Binding="{Binding Path=UserName}" Width="1*"/>
+                                <DataGridTextColumn Header="Электронная почта" Binding="{Binding Path=Email}" Width="1*"/>
+                                <DataGridTextColumn Header="Дата перемещения" Binding="{Binding Path=ChangesDate}" Width="1*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
                     </Grid>
                 </Border>
             </Grid>

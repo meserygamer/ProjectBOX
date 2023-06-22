@@ -93,7 +93,7 @@
                             <!--<ContentPresenter Margin="30,0,0,0"
                                               HorizontalAlignment="Left"
                                               VerticalAlignment="Center"></ContentPresenter>-->
-                            <TextBlock Text="Склад"
+                            <TextBlock Text="{Binding ContainerName}"
                                        Margin="30,0,0,0"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Center"></TextBlock>
@@ -147,13 +147,8 @@
                         <ListView BorderThickness="0"
                                   SelectionMode="Single"
                                   ItemContainerStyle="{StaticResource CategoryListViewItemStyle}"
-                                  SelectedItem="{Binding Category}">
-                            <TextBlock>LG Nexus 5X</TextBlock>
-                            <TextBlock>Huawei Nexus 6P</TextBlock>
-                            <TextBlock>iPhone 6S</TextBlock>
-                            <TextBlock>iPhone 6S Plus</TextBlock>
-                            <TextBlock>Аsus Zenphone 2</TextBlock>
-                            <TextBlock>Microsoft Lumia 950</TextBlock>
+                                  SelectedItem="{Binding Category}"
+                                  ItemsSource="{Binding CategoriesList}">
                         </ListView>
                     </ScrollViewer>
                     <Button Grid.Row="3"
@@ -207,7 +202,10 @@
                                 HorizontalAlignment="Left"
                                 Style="{StaticResource StyleForAllButtonOnItemWindow}">Переместить предметы</Button>
                         <!--таблица со списком предметов-->
-                        <DataGrid x:Name="MainGrid" Grid.Row="2" BorderThickness="0" AutoGenerateColumns = "False">
+                        <DataGrid x:Name="MainGrid" Grid.Row="2"
+                                  BorderThickness="0"
+                                  AutoGenerateColumns = "False"
+                                  ItemsSource="{Binding ItemsList}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Номер предмета" Binding="{Binding Path=ObjectId}" Width="1*"/>
                                 <DataGridTextColumn Header="Имя предмета" Binding="{Binding Path=ObjectName}" Width="1*"/>

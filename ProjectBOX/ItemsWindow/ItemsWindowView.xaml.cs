@@ -21,18 +21,18 @@ namespace ProjectBOX.ItemsWindow
     /// </summary>
     public partial class ItemsWindowView : Window
     {
-        List<CompleteTask> completeTasks;
+        //List<CompleteTask> completeTasks;
 
         public ItemsWindowView()
         {
             InitializeComponent();
-            GetAllCompleteTask();
+            //GetAllCompleteTask();
         }
 
-        public async void GetAllCompleteTask()
-        {
-            await Task.Run(() => {completeTasks = (new ProjectBoxDbContext().CompleteTasks.ToList()); });
-            MainGrid.ItemsSource = completeTasks;
-        }
+        //public async void GetAllCompleteTask()
+        //{
+        //    await Task.Run(() => {completeTasks = (new ProjectBoxDbContext().CompleteTasks.ToList()); });
+        //    MainGrid.ItemsSource = completeTasks;
+        //}
     }
 }

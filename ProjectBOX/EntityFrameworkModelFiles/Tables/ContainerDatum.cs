@@ -12,4 +12,9 @@ public partial class ContainerDatum
     public string? Description { get; set; }
 
     public virtual ICollection<HistoryOfChangesObjectLocation> HistoryOfChangesObjectLocations { get; set; } = new List<HistoryOfChangesObjectLocation>();
+
+    public override string ToString()
+    {
+        return ContainerName;
+    }
 }

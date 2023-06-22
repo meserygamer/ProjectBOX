@@ -1,6 +1,8 @@
 ﻿using ProjectBOX.Authorization.LoginUC;
+using ProjectBOX.EntityFrameworkModelFiles;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -15,6 +17,8 @@ namespace ProjectBOX.ItemsWindow
         private bool _userChoseSeeAllObject;
         private RelayCommand _userClickOnSeeAllObjectButton;
         private object? _category;
+        private ObservableCollection<ContainerDatum> _categoriesList = new ObservableCollection<ContainerDatum>();
+        private ObservableCollection<CompleteTask> _itemsList = new ObservableCollection<CompleteTask>();
 
         public RelayCommand UserClickOnSeeAllObjectButton
         {
@@ -35,7 +39,11 @@ namespace ProjectBOX.ItemsWindow
             {
                 _userChoseSeeAllObject = value;
                 OnPropertyChanged("UserChoseSeeAllObject");
-                ClearSelectedCategory();
+                if (value)
+                {
+                    ClearSelectedCategory();
+                    ReloadItemsList();
+                }
             }
         }
 
@@ -47,6 +55,27 @@ namespace ProjectBOX.ItemsWindow
                 _category = value;
                 OnPropertyChanged("Category");
                 ClearButtonSeeallObject();
+                if(Category is ContainerDatum container) ReloadItemsList(container);
+            }
+        }
+
+        public ObservableCollection<ContainerDatum> CategoriesList
+        {
+            get => _categoriesList;
+            set
+            {
+                _categoriesList = value;
+                OnPropertyChanged("CategoriesList");
+            }
+        }
+
+        public ObservableCollection<CompleteTask> ItemsList
+        {
+            get => _itemsList;
+            set
+            {
+                _itemsList = value;
+                OnPropertyChanged("ItemsList");
             }
         }
 
@@ -60,6 +89,26 @@ namespace ProjectBOX.ItemsWindow
         {
             _userChoseSeeAllObject = false;
             OnPropertyChanged("UserChoseSeeAllObject");
+        }
+
+        public ItemsWindowViewModel()
+        {
+            ReloadCategoriesAsync();
+        }
+
+        private async void ReloadCategoriesAsync()
+        {
+            await Task.Run(() => {CategoriesList = ItemsWindowModel.GetItemsWindowModel().GetAllContainerFromDB();});
+        }
+
+        private async void ReloadItemsList()
+        {
+            await Task.Run(() => { ItemsList = ItemsWindowModel.GetItemsWindowModel().GetAllItemsFromCategory();});
+        }
+
+        private async void ReloadItemsList(ContainerDatum container)
+        {
+            await Task.Run(() => { ItemsList = ItemsWindowModel.GetItemsWindowModel().GetAllItemsFromCategory(container); });
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

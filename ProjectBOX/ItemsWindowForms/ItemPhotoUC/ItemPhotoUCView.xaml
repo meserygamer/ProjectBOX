@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="ProjectBOX.ItemsWindowForms.ItemPhotoUC.ItemPhotoUCView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProjectBOX.ItemsWindowForms.ItemPhotoUC"
+             mc:Ignorable="d" 
+             d:DesignHeight="310" d:DesignWidth="340" Background="White">
+    <UserControl.Resources>
+        <Style x:Key="TextBlockNearButtonTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="Margin" Value="10 0 5 0"></Setter>
+            <Setter Property="FontFamily" Value="Inter"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+        </Style>
+        <Style x:Key="ObserverButton" TargetType ="Button">
+            <Setter Property="Background" Value="#36638D"></Setter>
+            <Setter Property="BorderThickness" Value="0"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="FontFamily" Value="Inter SemiBold"></Setter>
+            <Setter Property="FontSize" Value="12"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="0,10,10,0"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="270"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Height="270" Width="300" BorderThickness="1" BorderBrush="#36638D" HorizontalAlignment="Left">
+            <Image HorizontalAlignment="Left"/>
+        </Border>
+        <Grid Width="300" Grid.Row="1" HorizontalAlignment="Left" Height="30" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="230"></ColumnDefinition>
+                <ColumnDefinition Width="70"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0"
+                    BorderBrush = "#36638D"
+                    BorderThickness="1"
+                    CornerRadius="10 0 0 10">
+                <TextBlock Style="{StaticResource TextBlockNearButtonTextBlockStyle}"></TextBlock>
+            </Border>
+            <Button Grid.Column="1" Style="{StaticResource ObserverButton}">Обзор</Button>
+        </Grid>
+    </Grid>
+</UserControl>

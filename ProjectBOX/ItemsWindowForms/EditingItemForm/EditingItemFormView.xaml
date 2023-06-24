@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectBOX.ItemsWindowForms.EditingItemForm"
         xmlns:Watermarks="clr-namespace:ProjectBOX.Authorization"
+        xmlns:Image="clr-namespace:ProjectBOX.ItemsWindowForms.ItemPhotoUC"
         mc:Ignorable="d"
         Title="EditingItemFormView"
         Height="900" Width="720"
@@ -31,7 +32,7 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <ContentControl Grid.Column="0">
-
+                <Image:ItemPhotoUCView></Image:ItemPhotoUCView>
             </ContentControl>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>

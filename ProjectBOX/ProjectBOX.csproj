@@ -82,8 +82,4 @@
     </Resource>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ItemsWindowForms\AddingItemToListUC\" />
-  </ItemGroup>
-
 </Project>

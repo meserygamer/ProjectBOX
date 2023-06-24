@@ -83,7 +83,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ItemsWindowForms\DateTimeUC\" />
+    <Folder Include="ItemsWindowForms\AddingItemToListUC\" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,48 @@
+﻿<Window x:Class="ProjectBOX.ItemsWindowForms.CreateContainerForm.CreateContainerFormView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjectBOX.ItemsWindowForms.CreateContainerForm"
+        mc:Ignorable="d"
+        xmlns:Watermarks="clr-namespace:ProjectBOX.Authorization"
+        Title="CreateContainerFormView" Height="550" Width="500" ResizeMode = "NoResize">
+    <Window.Resources>
+        <ResourceDictionary Source="/ItemsWindowForms/CreateItemForm/CreateItemFormViewStyles.xaml"></ResourceDictionary>
+    </Window.Resources>
+    <Grid Margin="20 0 20 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="310"></RowDefinition>
+            <RowDefinition Height="110"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Style="{StaticResource MainLabelTextBlockStyle}"
+                   Grid.Row="0">Создание "контейнера"</TextBlock>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height ="67"></RowDefinition>
+                <RowDefinition Height ="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Style="{StaticResource FontForSubtitlesTextBlockStyle}">
+                    Название "контейнера"</TextBlock>
+            <Watermarks:WaterMarkTextBox Grid.Row="1"
+                         Style="{StaticResource FieldsStyleTextBox}"
+                         Height="40"
+                         Margin="0 10 0 17"
+                         WatermarkText='Введите название "контейнера"...'></Watermarks:WaterMarkTextBox>
+            <TextBlock Grid.Row="2" Style="{StaticResource FontForSubtitlesTextBlockStyle}">
+                    Описание "контейнера"</TextBlock>
+            <Watermarks:WaterMarkTextBox Grid.Row="3"
+                         Style="{StaticResource FieldsStyleTextBox}"
+                         Margin="0 10 0 0"
+                         TextWrapping="Wrap"
+                         WatermarkText='Введите описание "контейнера"...'></Watermarks:WaterMarkTextBox>
+        </Grid>
+        <Button Grid.Row="2"
+                Width="350" Height="60"
+                Style="{StaticResource ConfirmButtonStyle}">
+            Подтверждение</Button>
+    </Grid>
+</Window>

@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ProjectBOX"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
-             StartupUri="ItemsWindow/ItemsWindowView.xaml">
+             StartupUri="ItemsWindowForms/CreateItemMoveForm/CreateItemMoveFormView.xaml">
+    <!--StartupUri="ItemsWindow/ItemsWindowView.xaml"-->
     <!--StartupUri="Authorization/AuthorizationView.xaml"-->
     <Application.Resources>
         <ResourceDictionary>

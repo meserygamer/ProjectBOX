@@ -24,5 +24,10 @@ namespace ProjectBOX.ItemsWindowForms.ItemPhotoUC
         {
             InitializeComponent();
         }
+
+        private void Photo_SourceUpdated(object sender, DataTransferEventArgs e)
+        {
+            MessageBox.Show("&7&&&&&");
+        }
     }
 }

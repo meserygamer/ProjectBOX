@@ -31,14 +31,16 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <local:ItemPhotoUCViewModel x:Key="DT"></local:ItemPhotoUCViewModel>
     </UserControl.Resources>
-    <Grid>
+    <Grid DataContext="{StaticResource DT}">
         <Grid.RowDefinitions>
             <RowDefinition Height="270"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
         </Grid.RowDefinitions>
         <Border Height="270" Width="300" BorderThickness="1" BorderBrush="#36638D" HorizontalAlignment="Left">
-            <Image HorizontalAlignment="Left"/>
+            <Image Name="Photo" HorizontalAlignment="Left" Source="{Binding ImageOnBorder, Mode=OneWay}" SourceUpdated="Photo_SourceUpdated">
+            </Image>
         </Border>
         <Grid Width="300" Grid.Row="1" HorizontalAlignment="Left" Height="30" VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
@@ -51,7 +53,9 @@
                     CornerRadius="10 0 0 10">
                 <TextBlock Style="{StaticResource TextBlockNearButtonTextBlockStyle}"></TextBlock>
             </Border>
-            <Button Grid.Column="1" Style="{StaticResource ObserverButton}">Обзор</Button>
+            <Button Grid.Column="1"
+                    Style="{StaticResource ObserverButton}"
+                    Command="{Binding ObserverButtonClick}">Обзор</Button>
         </Grid>
     </Grid>
 </UserControl>

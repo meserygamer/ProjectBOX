@@ -1,6 +1,9 @@
-﻿using System;
+﻿using ProjectBOX.Authorization.LoginUC;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,19 +18,25 @@ using System.Windows.Shapes;
 
 namespace ProjectBOX.ItemsWindowForms.ItemPhotoUC
 {
-    /// <summary>
-    /// Логика взаимодействия для ItemPhotoUCView.xaml
-    /// </summary>
     public partial class ItemPhotoUCView : UserControl
     {
+        public static readonly DependencyProperty ByteArrayFormOfImageProperty;
+
+        public byte[] ByteArrayFormOfImage
+        {
+            get { return (byte[])GetValue(ByteArrayFormOfImageProperty); }
+            set { SetValue(ByteArrayFormOfImageProperty, value);}
+        }
+
+        static ItemPhotoUCView()
+        {
+            ByteArrayFormOfImageProperty = DependencyProperty.Register("ByteArrayFormOfImage", typeof(byte[]), typeof(ItemPhotoUCView));
+        }
+
         public ItemPhotoUCView()
         {
             InitializeComponent();
-        }
-
-        private void Photo_SourceUpdated(object sender, DataTransferEventArgs e)
-        {
-            MessageBox.Show("&7&&&&&");
+            SetBinding(ItemPhotoUCView.ByteArrayFormOfImageProperty, (Binding)Resources["MB"]);
         }
     }
 }

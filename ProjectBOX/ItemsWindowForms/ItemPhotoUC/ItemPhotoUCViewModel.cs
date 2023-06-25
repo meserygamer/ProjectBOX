@@ -11,13 +11,17 @@ using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using System.Windows.Controls;
+using ProjectBOX.Authorization.LoginUC;
+using System.Windows;
 
 namespace ProjectBOX.ItemsWindowForms.ItemPhotoUC
 {
-    class ItemPhotoUCViewModel : INotifyPropertyChanged
+    class ItemPhotoUCViewModel : DependencyObject, INotifyPropertyChanged
     {
         private BitmapImage _imageOnBorder;
         private RelayCommand _observerButtonClick;
+        private string _fileName;
+        private byte[] _image;
 
         public RelayCommand ObserverButtonClick
         {
@@ -28,13 +32,19 @@ namespace ProjectBOX.ItemsWindowForms.ItemPhotoUC
                   {
                       OpenFileDialog fileDialog = new OpenFileDialog();
                       fileDialog.ShowDialog();
-                      byte[] byteImage = File.ReadAllBytes(fileDialog.FileName);
-                      _imageOnBorder = new BitmapImage();
-                      _imageOnBorder.BeginInit();
-                      _imageOnBorder.StreamSource = new MemoryStream(byteImage);
-                      _imageOnBorder.EndInit();
-                      OnPropertyChanged("ImageOnBorder");
+                      FileName = fileDialog.FileName;
+                      Image = File.ReadAllBytes(FileName);
+                      ImageOnBorder = CreateBitMapImageFromByteArray(Image);
                   }));
+            }
+        }
+
+        public string FileName
+        {
+            get { return _fileName; }
+            set { 
+                _fileName = value;
+                OnPropertyChanged("FileName");
             }
         }
 
@@ -48,12 +58,22 @@ namespace ProjectBOX.ItemsWindowForms.ItemPhotoUC
             }
         }
 
-        public ItemPhotoUCViewModel()
+        public byte[] Image
         {
-            ImageOnBorder = new BitmapImage();
-            ImageOnBorder.BeginInit();
-            ImageOnBorder.StreamSource = new MemoryStream(File.ReadAllBytes("C:\\Users\\kiril\\Downloads\\abstraktsiia_vektor_kot_321_1920x1080.jpg"));
-            ImageOnBorder.EndInit();
+            get { return _image; }
+            set {
+                _image = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private BitmapImage CreateBitMapImageFromByteArray(byte[] ByteArray)
+        {
+            BitmapImage bitmap = new();
+            bitmap.BeginInit();
+            bitmap.StreamSource = new MemoryStream(ByteArray);
+            bitmap.EndInit();
+            return bitmap;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

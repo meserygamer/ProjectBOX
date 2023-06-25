@@ -11,6 +11,9 @@
         ResizeMode="NoResize"
         Width="720"
         Height="560">
+    <Window.DataContext>
+        <local:CreateItemFormViewModel x:Name="DT"></local:CreateItemFormViewModel>
+    </Window.DataContext>
     <Window.Resources>
         <ResourceDictionary Source="/ItemsWindowForms/CreateItemForm/CreateItemFormViewStyles.xaml"></ResourceDictionary>
     </Window.Resources>
@@ -28,7 +31,7 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <ContentControl Grid.Column="0">
-                <Image:ItemPhotoUCView></Image:ItemPhotoUCView>
+                <Image:ItemPhotoUCView ByteArrayFormOfImage="{Binding ImageByteArray, Mode=TwoWay}"></Image:ItemPhotoUCView>
             </ContentControl>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -43,14 +46,16 @@
                          Style="{StaticResource FieldsStyleTextBox}"
                          Height="40"
                          Margin="0 10 0 17"
-                         WatermarkText="Введите название предмета..."></Watermarks:WaterMarkTextBox>
+                         WatermarkText="Введите название предмета..."
+                         Text="{Binding ItemName, Mode=TwoWay}"></Watermarks:WaterMarkTextBox>
                 <TextBlock Grid.Row="2" Style="{StaticResource FontForSubtitlesTextBlockStyle}">
                     Описание предмета</TextBlock>
                 <Watermarks:WaterMarkTextBox Grid.Row="3"
                          Style="{StaticResource FieldsStyleTextBox}"
                          Margin="0 10 0 0"
                          TextWrapping="Wrap"
-                         WatermarkText="Введите описание предмета..."></Watermarks:WaterMarkTextBox>
+                         WatermarkText="Введите описание предмета..."
+                         Text="{Binding ItemDescription, Mode=TwoWay}"></Watermarks:WaterMarkTextBox>
             </Grid>
         </Grid>
         <Button Grid.Row="2"

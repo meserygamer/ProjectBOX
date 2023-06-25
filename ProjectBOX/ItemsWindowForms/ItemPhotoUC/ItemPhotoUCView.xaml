@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ProjectBOX.ItemsWindowForms.ItemPhotoUC.ItemPhotoUCView"
+﻿<UserControl x:Name="MainUserControl" x:Class="ProjectBOX.ItemsWindowForms.ItemPhotoUC.ItemPhotoUCView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -31,15 +31,16 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <local:ItemPhotoUCViewModel x:Key="DT"></local:ItemPhotoUCViewModel>
+        <local:ItemPhotoUCViewModel x:Key="DC"></local:ItemPhotoUCViewModel>
+        <Binding x:Key="MB" Source="{StaticResource DC}" Path="Image" Mode="OneWay" UpdateSourceTrigger = "PropertyChanged"></Binding>
     </UserControl.Resources>
-    <Grid DataContext="{StaticResource DT}">
+    <Grid DataContext="{StaticResource DC}">
         <Grid.RowDefinitions>
             <RowDefinition Height="270"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
         </Grid.RowDefinitions>
         <Border Height="270" Width="300" BorderThickness="1" BorderBrush="#36638D" HorizontalAlignment="Left">
-            <Image Name="Photo" HorizontalAlignment="Left" Source="{Binding ImageOnBorder, Mode=OneWay}" SourceUpdated="Photo_SourceUpdated">
+            <Image Name="Photo" HorizontalAlignment="Left" Source="{Binding ImageOnBorder, Mode=OneWay}">
             </Image>
         </Border>
         <Grid Width="300" Grid.Row="1" HorizontalAlignment="Left" Height="30" VerticalAlignment="Bottom">
@@ -51,7 +52,8 @@
                     BorderBrush = "#36638D"
                     BorderThickness="1"
                     CornerRadius="10 0 0 10">
-                <TextBlock Style="{StaticResource TextBlockNearButtonTextBlockStyle}"></TextBlock>
+                <TextBlock Style="{StaticResource TextBlockNearButtonTextBlockStyle}"
+                           Text="{Binding FileName}" VerticalAlignment="Center"></TextBlock>
             </Border>
             <Button Grid.Column="1"
                     Style="{StaticResource ObserverButton}"

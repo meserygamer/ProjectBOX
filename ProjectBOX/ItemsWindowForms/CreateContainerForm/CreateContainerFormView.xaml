@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         xmlns:Watermarks="clr-namespace:ProjectBOX.Authorization"
         Title="CreateContainerFormView" Height="550" Width="500" ResizeMode = "NoResize">
+    <Window.DataContext>
+        <local:CreateContainerFormViewModel></local:CreateContainerFormViewModel>
+    </Window.DataContext>
     <Window.Resources>
         <ResourceDictionary Source="/ItemsWindowForms/CreateItemForm/CreateItemFormViewStyles.xaml"></ResourceDictionary>
     </Window.Resources>
@@ -31,18 +34,21 @@
                          Style="{StaticResource FieldsStyleTextBox}"
                          Height="40"
                          Margin="0 10 0 17"
-                         WatermarkText='Введите название "контейнера"...'></Watermarks:WaterMarkTextBox>
+                         WatermarkText='Введите название "контейнера"...'
+                         Text="{Binding CategoryName}"></Watermarks:WaterMarkTextBox>
             <TextBlock Grid.Row="2" Style="{StaticResource FontForSubtitlesTextBlockStyle}">
                     Описание "контейнера"</TextBlock>
             <Watermarks:WaterMarkTextBox Grid.Row="3"
                          Style="{StaticResource FieldsStyleTextBox}"
                          Margin="0 10 0 0"
                          TextWrapping="Wrap"
-                         WatermarkText='Введите описание "контейнера"...'></Watermarks:WaterMarkTextBox>
+                         WatermarkText='Введите описание "контейнера"...'
+                         Text="{Binding CategoryDescription}"></Watermarks:WaterMarkTextBox>
         </Grid>
         <Button Grid.Row="2"
                 Width="350" Height="60"
-                Style="{StaticResource ConfirmButtonStyle}">
+                Style="{StaticResource ConfirmButtonStyle}"
+                Command="{Binding CreateCategoryClick}">
             Подтверждение</Button>
     </Grid>
 </Window>

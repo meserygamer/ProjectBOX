@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ProjectBOX"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
-             StartupUri="ItemsWindowForms/EditingItemForm/EditingItemFormView.xaml">
+             StartupUri="ItemsWindowForms/CreateContainerForm/CreateContainerFormView.xaml">
     <!--StartupUri="ItemsWindowForms/EditingItemForm/EditingItemFormView.xaml"-->
     <!--StartupUri="ItemsWindow/ItemsWindowView.xaml"-->
     <!--StartupUri="Authorization/AuthorizationView.xaml"-->

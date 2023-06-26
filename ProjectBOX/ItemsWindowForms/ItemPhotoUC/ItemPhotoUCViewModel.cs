@@ -16,12 +16,13 @@ using System.Windows;
 
 namespace ProjectBOX.ItemsWindowForms.ItemPhotoUC
 {
-    class ItemPhotoUCViewModel : DependencyObject, INotifyPropertyChanged
+    class ItemPhotoUCViewModel : FrameworkElement, INotifyPropertyChanged
     {
         private BitmapImage _imageOnBorder;
         private RelayCommand _observerButtonClick;
         private string _fileName;
-        private byte[] _image;
+
+        public static readonly DependencyProperty ImageProperty = DependencyProperty.Register("Image", typeof(byte[]), typeof(ItemPhotoUCViewModel));
 
         public RelayCommand ObserverButtonClick
         {
@@ -60,11 +61,8 @@ namespace ProjectBOX.ItemsWindowForms.ItemPhotoUC
 
         public byte[] Image
         {
-            get { return _image; }
-            set {
-                _image = value;
-                OnPropertyChanged();
-            }
+            get { return (byte[])GetValue(ImageProperty); }
+            set { SetValue(ImageProperty, value); }
         }
 
         private BitmapImage CreateBitMapImageFromByteArray(byte[] ByteArray)

@@ -43,7 +43,7 @@ namespace ProjectBOX.ItemsWindowForms.CreateItemForm
             {
                 _imageByteArray = value;
                 OnPropertyChanged("ImageByteArray");
-                MessageBox.Show("d");
+                MessageBox.Show($"{_imageByteArray}");
             }
         }
 

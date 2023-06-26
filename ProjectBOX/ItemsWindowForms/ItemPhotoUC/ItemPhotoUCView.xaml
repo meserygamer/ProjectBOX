@@ -31,14 +31,13 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <local:ItemPhotoUCViewModel x:Key="DC"></local:ItemPhotoUCViewModel>
-        <Binding x:Key="MB" Source="{StaticResource DC}" Path="Image" Mode="OneWay" UpdateSourceTrigger = "PropertyChanged"></Binding>
     </UserControl.Resources>
-    <Grid DataContext="{StaticResource DC}">
+    <Grid DataContext="{Binding ElementName=DC, Mode=OneWay}" >
         <Grid.RowDefinitions>
             <RowDefinition Height="270"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
         </Grid.RowDefinitions>
+        <local:ItemPhotoUCViewModel x:Name="DC" DataContext="{Binding ElementName=MainUserControl, Mode=OneWay}" Image="{Binding ByteArrayFormOfImage, Mode=TwoWay}"></local:ItemPhotoUCViewModel>
         <Border Height="270" Width="300" BorderThickness="1" BorderBrush="#36638D" HorizontalAlignment="Left">
             <Image Name="Photo" HorizontalAlignment="Left" Source="{Binding ImageOnBorder, Mode=OneWay}">
             </Image>

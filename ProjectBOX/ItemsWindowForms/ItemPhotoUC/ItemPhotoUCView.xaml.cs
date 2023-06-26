@@ -36,7 +36,6 @@ namespace ProjectBOX.ItemsWindowForms.ItemPhotoUC
         public ItemPhotoUCView()
         {
             InitializeComponent();
-            SetBinding(ItemPhotoUCView.ByteArrayFormOfImageProperty, (Binding)Resources["MB"]);
         }
     }
 }

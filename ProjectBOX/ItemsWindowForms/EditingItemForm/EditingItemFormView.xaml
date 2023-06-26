@@ -10,6 +10,9 @@
         Title="EditingItemFormView"
         Height="900" Width="720"
         ResizeMode="NoResize">
+    <Window.DataContext>
+        <local:EditingItemFormViewModel></local:EditingItemFormViewModel>
+    </Window.DataContext>
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -32,7 +35,33 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <ContentControl Grid.Column="0">
-                <Image:ItemPhotoUCView></Image:ItemPhotoUCView>
+                <!--<Image:ItemPhotoUCView x:Name="PhotoUC" ByteArrayFormOfImage = "{Binding ItemImage, Mode=TwoWay, NotifyOnSourceUpdated = True, UpdateSourceTrigger=PropertyChanged}"></Image:ItemPhotoUCView>-->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="270"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Border Height="270" Width="300" BorderThickness="1" BorderBrush="#36638D" HorizontalAlignment="Left">
+                        <Image Name="Photo" HorizontalAlignment="Left" Source="{Binding ImageOnBorder, Mode=OneWay}">
+                        </Image>
+                    </Border>
+                    <Grid Width="300" Grid.Row="1" HorizontalAlignment="Left" Height="30" VerticalAlignment="Bottom">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="230"></ColumnDefinition>
+                            <ColumnDefinition Width="70"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0"
+                    BorderBrush = "#36638D"
+                    BorderThickness="1"
+                    CornerRadius="10 0 0 10">
+                            <TextBlock Style="{StaticResource TextBlockNearButtonTextBlockStyle}"
+                           Text="{Binding FileName}" VerticalAlignment="Center"></TextBlock>
+                        </Border>
+                        <Button Grid.Column="1"
+                    Style="{StaticResource ObserverButton}"
+                    Command="{Binding ObserverButtonClick}">Обзор</Button>
+                    </Grid>
+                </Grid>
             </ContentControl>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -47,14 +76,16 @@
                          Style="{StaticResource FieldsStyleTextBox}"
                          Height="40"
                          Margin="0 10 0 17"
-                         WatermarkText="Введите название предмета..."></Watermarks:WaterMarkTextBox>
+                         WatermarkText="Введите название предмета..."
+                         Text="{Binding ItemName, Mode=TwoWay}"></Watermarks:WaterMarkTextBox>
                 <TextBlock Grid.Row="2" Style="{StaticResource FontForSubtitlesTextBlockStyle}">
                     Описание предмета</TextBlock>
                 <Watermarks:WaterMarkTextBox Grid.Row="3"
                          Style="{StaticResource FieldsStyleTextBox}"
                          Margin="0 10 0 0"
                          TextWrapping="Wrap"
-                         WatermarkText="Введите описание предмета..."></Watermarks:WaterMarkTextBox>
+                         WatermarkText="Введите описание предмета..."
+                         Text="{Binding ItemDescription, Mode=TwoWay}"></Watermarks:WaterMarkTextBox>
             </Grid>
         </Grid>
         <Grid Margin="0 26 0 0" Grid.Row="2">
@@ -66,19 +97,21 @@
             <DataGrid Grid.Row ="1"
                       AutoGenerateColumns="False"
                       IsReadOnly="True"
-                      BorderBrush="#36638D">
+                      BorderBrush="#36638D"
+                      ItemsSource="{Binding ItemHistoryChanged, Mode=TwoWay}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Куда" Width="0.5*" ></DataGridTextColumn>
-                    <DataGridTextColumn Header="Автор" Width="0.5*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Электронная почта" Width="1*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Когда" Width="0.5*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Описание перемещения" Width="2*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Куда" Width="0.5*" Binding="{Binding Container.ContainerName}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Автор" Width="0.5*" Binding="{Binding User.UserName}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Электронная почта" Width="1*" Binding ="{Binding User.Email}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Когда" Width="0.5*" Binding="{Binding ChangesDate}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Описание перемещения" Width="2*" Binding="{Binding Description}"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
         <Button Grid.Row="3"
                 Width="350" Height="60"
-                Style="{StaticResource ConfirmButtonStyle}">
+                Style="{StaticResource ConfirmButtonStyle}"
+                Command="{Binding ConfirmItemChange}">
             Подтверждение</Button>
     </Grid>
 </Window>

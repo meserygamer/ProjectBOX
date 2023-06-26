@@ -13,6 +13,7 @@ namespace ProjectBOX.ItemsWindowForms.CreateItemForm
 {
     class CreateItemFormViewModel : INotifyPropertyChanged
     {
+
         private string _itemName;
         private string _itemDescription;
         private byte[] _imageByteArray;

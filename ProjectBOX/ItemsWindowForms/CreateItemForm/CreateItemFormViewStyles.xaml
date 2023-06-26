@@ -88,4 +88,30 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <!--g-->
+    <Style x:Key="TextBlockNearButtonTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="Margin" Value="10 0 5 0"></Setter>
+        <Setter Property="FontFamily" Value="Inter"></Setter>
+        <Setter Property="FontSize" Value="14"></Setter>
+    </Style>
+    <Style x:Key="ObserverButton" TargetType ="Button">
+        <Setter Property="Background" Value="#36638D"></Setter>
+        <Setter Property="BorderThickness" Value="0"></Setter>
+        <Setter Property="Foreground" Value="White"></Setter>
+        <Setter Property="FontFamily" Value="Inter SemiBold"></Setter>
+        <Setter Property="FontSize" Value="12"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="0,10,10,0"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--g-->
 </ResourceDictionary>

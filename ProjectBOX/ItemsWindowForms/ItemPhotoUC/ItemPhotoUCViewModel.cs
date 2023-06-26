@@ -35,7 +35,7 @@ namespace ProjectBOX.ItemsWindowForms.ItemPhotoUC
                       fileDialog.ShowDialog();
                       FileName = fileDialog.FileName;
                       Image = File.ReadAllBytes(FileName);
-                      ImageOnBorder = CreateBitMapImageFromByteArray(Image);
+                      //ImageOnBorder = CreateBitMapImageFromByteArray(Image);
                   }));
             }
         }
@@ -62,7 +62,10 @@ namespace ProjectBOX.ItemsWindowForms.ItemPhotoUC
         public byte[] Image
         {
             get { return (byte[])GetValue(ImageProperty); }
-            set { SetValue(ImageProperty, value); }
+            set {
+                SetValue(ImageProperty, value);
+                SetImage(value);
+            }
         }
 
         private BitmapImage CreateBitMapImageFromByteArray(byte[] ByteArray)
@@ -73,6 +76,8 @@ namespace ProjectBOX.ItemsWindowForms.ItemPhotoUC
             bitmap.EndInit();
             return bitmap;
         }
+
+        private void SetImage(byte[] imgByteArray) => ImageOnBorder = CreateBitMapImageFromByteArray(imgByteArray);
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

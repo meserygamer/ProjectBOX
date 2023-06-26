@@ -20,17 +20,16 @@ namespace ProjectBOX.ItemsWindowForms.ItemPhotoUC
 {
     public partial class ItemPhotoUCView : UserControl
     {
-        public static readonly DependencyProperty ByteArrayFormOfImageProperty;
+        public static readonly DependencyProperty ByteArrayFormOfImageProperty = DependencyProperty.Register("ByteArrayFormOfImage", typeof(byte[]), typeof(ItemPhotoUCView));
 
         public byte[] ByteArrayFormOfImage
         {
-            get { return (byte[])GetValue(ByteArrayFormOfImageProperty); }
-            set { SetValue(ByteArrayFormOfImageProperty, value);}
-        }
-
-        static ItemPhotoUCView()
-        {
-            ByteArrayFormOfImageProperty = DependencyProperty.Register("ByteArrayFormOfImage", typeof(byte[]), typeof(ItemPhotoUCView));
+            get {
+                return (byte[])GetValue(ByteArrayFormOfImageProperty);
+            }
+            set {
+                SetValue(ByteArrayFormOfImageProperty, value);
+            }
         }
 
         public ItemPhotoUCView()

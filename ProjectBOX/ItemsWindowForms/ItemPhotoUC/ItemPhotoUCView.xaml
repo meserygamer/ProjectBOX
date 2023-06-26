@@ -37,7 +37,7 @@
             <RowDefinition Height="270"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
         </Grid.RowDefinitions>
-        <local:ItemPhotoUCViewModel x:Name="DC" DataContext="{Binding ElementName=MainUserControl, Mode=OneWay}" Image="{Binding ByteArrayFormOfImage, Mode=TwoWay}"></local:ItemPhotoUCViewModel>
+        <local:ItemPhotoUCViewModel x:Name="DC" Image="{Binding ByteArrayFormOfImage, ElementName=MainUserControl, Mode=TwoWay}"></local:ItemPhotoUCViewModel>
         <Border Height="270" Width="300" BorderThickness="1" BorderBrush="#36638D" HorizontalAlignment="Left">
             <Image Name="Photo" HorizontalAlignment="Left" Source="{Binding ImageOnBorder, Mode=OneWay}">
             </Image>

@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ProjectBOX"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
-             StartupUri="ItemsWindowForms/CreateItemForm/CreateItemFormView.xaml">
+             StartupUri="ItemsWindowForms/EditingItemForm/EditingItemFormView.xaml">
+    <!--StartupUri="ItemsWindowForms/EditingItemForm/EditingItemFormView.xaml"-->
     <!--StartupUri="ItemsWindow/ItemsWindowView.xaml"-->
     <!--StartupUri="Authorization/AuthorizationView.xaml"-->
     <Application.Resources>
@@ -12,6 +13,7 @@
                 <ResourceDictionary Source="ItemsWindow/UserAreaUC/UserAreaStyles.xaml"/>
                 <ResourceDictionary Source="Authorization/LoginWindowStyles.xaml"/>
                 <ResourceDictionary Source="/ItemsWindow/SearchFieldUC/SearchFieldUCStyles.xaml"/>
+                <ResourceDictionary Source="AllResourcesForTransportBetweenWindows.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -14,4 +14,9 @@ public partial class ObjectDatum
     public byte[]? Image { get; set; }
 
     public virtual ICollection<HistoryOfChangesObjectLocation> HistoryOfChangesObjectLocations { get; set; } = new List<HistoryOfChangesObjectLocation>();
+
+    public override string ToString()
+    {
+        return ObjectName + " (" + ObjectId + ")";
+    }
 }

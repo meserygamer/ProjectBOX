@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjectBOX.ItemsWindowForms.DateTimeUC"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+             x:Name="UserControlDatePicker"
              d:DesignHeight="40" d:DesignWidth="460" Background ="White"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <UserControl.Resources>
@@ -424,13 +425,18 @@
             <Setter Property="Template" Value="{StaticResource ComboBoxTemplate}"/>
         </Style>
     </UserControl.Resources>
-    <Grid>
+    <Grid DataContext="{Binding ElementName=DT, Mode=OneWay}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="120"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <local:DateTimePickerUCViewModel x:Name = "DT" CurrentDateTime="{Binding CurrentDateTime, ElementName=UserControlDatePicker, Mode=OneWayToSource}"/>
         <Border BorderBrush="#36638D" BorderThickness ="1" CornerRadius="10">
-            <DatePicker Style="{DynamicResource DatePickerStyle1}"  BorderThickness="0" Height="25" Margin="5 3 0 0"></DatePicker>
+            <DatePicker Style="{DynamicResource DatePickerStyle1}"
+                        BorderThickness="0"
+                        Height="25"
+                        Margin="5 3 0 0"
+                        Text="{Binding Date,Mode=TwoWay}"></DatePicker>
         </Border>
         <Grid Grid.Column="1" Margin="20 0 0 0" Width="120" HorizontalAlignment="Left">
             <Grid.ColumnDefinitions>
@@ -438,29 +444,22 @@
                 <ColumnDefinition Width ="auto"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <ComboBox  Style="{DynamicResource ComboBoxStyle1}" VerticalAlignment="Center" Height="40" BorderBrush="#36638D" MaxDropDownHeight="100">
-                <ComboBoxItem>1</ComboBoxItem>
-                <ComboBoxItem>2</ComboBoxItem>
-                <ComboBoxItem>3</ComboBoxItem>
-                <ComboBoxItem>4</ComboBoxItem>
-                <ComboBoxItem>5</ComboBoxItem>
-                <ComboBoxItem>6</ComboBoxItem>
-                <ComboBoxItem>7</ComboBoxItem>
-                <ComboBoxItem>8</ComboBoxItem>
-                <ComboBoxItem>9</ComboBoxItem>
-                <ComboBoxItem>10</ComboBoxItem>
-                <ComboBoxItem>11</ComboBoxItem>
-                <ComboBoxItem>12</ComboBoxItem>
-            </ComboBox>
+            <ComboBox  Style="{DynamicResource ComboBoxStyle1}"
+                       VerticalAlignment="Center"
+                       Height="40"
+                       BorderBrush="#36638D"
+                       MaxDropDownHeight="100"
+                       ItemsSource="{Binding Hours}"
+                       SelectedValue="{Binding SelectedHours, Mode=TwoWay}"/>
             <TextBlock Grid.Column ="1" VerticalAlignment="Center" FontSize="20" Margin="5,0,5,0">:</TextBlock>
-            <ComboBox Style="{DynamicResource ComboBoxStyle1}" BorderBrush="#36638D" Grid.Column="2">
-                <ComboBoxItem>10</ComboBoxItem>
-                <ComboBoxItem>20</ComboBoxItem>
-                <ComboBoxItem>30</ComboBoxItem>
-                <ComboBoxItem>40</ComboBoxItem>
-                <ComboBoxItem>50</ComboBoxItem>
-                <ComboBoxItem>60</ComboBoxItem>
-            </ComboBox>
+            <ComboBox Style="{DynamicResource ComboBoxStyle1}"
+                      VerticalAlignment="Center"
+                      Height="40"
+                      BorderBrush="#36638D"
+                      MaxDropDownHeight="100"
+                      ItemsSource="{Binding Minutes}"
+                      Grid.Column="2"
+                      SelectedValue="{Binding SelectedMinutes, Mode=TwoWay}"/>
         </Grid>
     </Grid>
 </UserControl>

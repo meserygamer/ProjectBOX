@@ -1,4 +1,5 @@
-﻿using ProjectBOX.ItemsWindowForms.ItemPhotoUC;
+﻿using Microsoft.Win32;
+using ProjectBOX.ItemsWindowForms.ItemPhotoUC;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,7 @@ namespace ProjectBOX.ItemsWindowForms.CreateItemForm
         private string _itemName;
         private string _itemDescription;
         private byte[] _imageByteArray;
+        private RelayCommand _createItem;
 
         public string ItemName
         {
@@ -43,7 +45,25 @@ namespace ProjectBOX.ItemsWindowForms.CreateItemForm
             {
                 _imageByteArray = value;
                 OnPropertyChanged("ImageByteArray");
-                MessageBox.Show($"{_imageByteArray}");
+            }
+        }
+
+        public RelayCommand CreateItem
+        {
+            get
+            {
+                return _createItem ??
+                  (_createItem = new RelayCommand(obj =>
+                  {
+                      if(new Validator(_itemName).CheckItemNameOnEmpty().Validation())
+                      {
+                          (new CreateItemFormDataBase(ItemName, ItemDescription, ImageByteArray)).AddItemInDataBaseAsync();
+                      }
+                      else
+                      {
+                          MessageBox.Show("Поле название предмета - пустое, предмет не добавлен");
+                      }
+                  }));
             }
         }
 

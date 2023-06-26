@@ -60,7 +60,8 @@
         </Grid>
         <Button Grid.Row="2"
                 Width="350" Height="60"
-                Style="{StaticResource ConfirmButtonStyle}">
+                Style="{StaticResource ConfirmButtonStyle}"
+                Command="{Binding CreateItem}">
             Подтверждение</Button>
     </Grid>
 </Window>

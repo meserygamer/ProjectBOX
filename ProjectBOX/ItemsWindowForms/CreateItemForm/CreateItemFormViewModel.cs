@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using ProjectBOX.ItemsWindowForms.CreateContainerForm;
 using ProjectBOX.ItemsWindowForms.ItemPhotoUC;
 using System;
 using System.Collections.Generic;
@@ -59,6 +60,7 @@ namespace ProjectBOX.ItemsWindowForms.CreateItemForm
                       if(new Validator(_itemName).CheckItemNameOnEmpty().Validation())
                       {
                           (new CreateItemFormDataBase(ItemName, ItemDescription, ImageByteArray)).AddItemInDataBaseAsync();
+                          ((CreateItemFormView)Application.Current.Windows[Application.Current.Windows.Count - 1]).DialogResult = true; ///
                       }
                       else
                       {

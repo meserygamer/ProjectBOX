@@ -53,6 +53,7 @@ namespace ProjectBOX.ItemsWindowForms.CreateContainerForm
                           CreateContainerFormInteractionWithDataBase.GetExemplar().CategoryName = _categoryName;
                           CreateContainerFormInteractionWithDataBase.GetExemplar().CategoryDescription = _categoryDescription;
                           CreateContainerFormInteractionWithDataBase.GetExemplar().AddCategoryInDataBaseAsync();
+                          ((CreateContainerFormView)Application.Current.Windows[Application.Current.Windows.Count - 1]).DialogResult = true; ///
                       }
                       else
                       {

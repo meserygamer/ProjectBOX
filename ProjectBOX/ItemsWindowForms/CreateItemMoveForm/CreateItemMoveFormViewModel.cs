@@ -1,5 +1,6 @@
 ﻿using ProjectBOX.EntityFrameworkModelFiles;
 using ProjectBOX.ItemsWindowForms.AddingItemToListUC;
+using ProjectBOX.ItemsWindowForms.CreateContainerForm;
 using ProjectBOX.ItemsWindowForms.EditingItemForm;
 using System;
 using System.Collections.Generic;
@@ -76,6 +77,7 @@ namespace ProjectBOX.ItemsWindowForms.CreateItemMoveForm
                       (CreateItemMoveFormInteractionWithDB.GetExampler()).AddMovementInDataBase(UserDateTime,
                           (int)Application.Current.Resources["UserID"], (int)Application.Current.Resources["SelectedContainerID"],
                           MovementDescription, ListOfMovedItems);
+                      ((CreateItemMoveFormView)Application.Current.Windows[Application.Current.Windows.Count - 1]).DialogResult = true; ///
                   }));
             }
         }

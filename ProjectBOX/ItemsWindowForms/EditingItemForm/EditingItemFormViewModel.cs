@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using ProjectBOX.EntityFrameworkModelFiles;
+using ProjectBOX.ItemsWindowForms.CreateContainerForm;
 using ProjectBOX.ItemsWindowForms.CreateItemForm;
 using ProjectBOX.ItemsWindowForms.ItemPhotoUC;
 using System;
@@ -118,6 +119,7 @@ namespace ProjectBOX.ItemsWindowForms.EditingItemForm
                       if (new Validator(ItemName).CheckItemNameOnEmpty().Validation())
                       {
                           _editingItemFormModel.ChangeDataAboutItemInDB(ItemName, ItemDescription, ItemImage);
+                          ((EditingItemFormView)Application.Current.Windows[Application.Current.Windows.Count - 1]).DialogResult = true; ///
                       }
                       else
                       {
@@ -169,7 +171,7 @@ namespace ProjectBOX.ItemsWindowForms.EditingItemForm
         {
             ItemName = ItemData.ObjectName;
             ItemDescription = ItemData.Description;
-            ItemImage = ItemData.Image;
+            if(ItemData.Image is not null) ItemImage = ItemData.Image;
             ItemHistoryChanged = new ObservableCollection<HistoryOfChangesObjectLocation>(ItemData.HistoryOfChangesObjectLocations);
         }
 

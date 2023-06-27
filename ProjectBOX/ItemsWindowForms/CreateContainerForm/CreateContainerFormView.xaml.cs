@@ -23,5 +23,10 @@ namespace ProjectBOX.ItemsWindowForms.CreateContainerForm
         {
             InitializeComponent();
         }
+
+        public void EndThisDialogOnTrue()
+        {
+            this.DialogResult = true;
+        }
     }
 }

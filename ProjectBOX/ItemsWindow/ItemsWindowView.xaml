@@ -51,6 +51,16 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="StyleForCreateMovementButton"
+               TargetType="Button"
+               BasedOn="{StaticResource StyleForAllButtonOnItemWindow}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding UserChoseSeeAllObject}"
+                                         Value="True">
+                    <Setter Property="Visibility" Value = "Hidden"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="ShowAllObjectsButtonStyle"
                TargetType="Button"
                BasedOn="{StaticResource ItemsCategoryFont}">
@@ -156,7 +166,8 @@
                             Margin="0,13,0,0"
                             Width ="350"
                             HorizontalAlignment="Center"
-                            Style="{StaticResource StyleForAllButtonOnItemWindow}">
+                            Style="{StaticResource StyleForAllButtonOnItemWindow}"
+                            Command="{Binding CreateContainerClick}">
                         Добавить помещение
                     </Button>
                 </Grid>
@@ -182,7 +193,8 @@
                 <SearchBar:SearchFieldUCView></SearchBar:SearchFieldUCView>
                 <!--Кнопка добавления нового предмета-->
                 <Button Grid.Column="2"
-                        Style="{StaticResource StyleForAllButtonOnItemWindow}">Добавить предмет
+                        Style="{StaticResource StyleForAllButtonOnItemWindow}"
+                        Command="{Binding CreateNewItemClick}">Добавить предмет
                 </Button>
             </Grid>
             <!--Грид отвечающий за отображение таблицы предметов и кнопки перемещения предметов-->
@@ -201,12 +213,16 @@
                         <Button Height="75"
                                 Width="350"
                                 HorizontalAlignment="Left"
-                                Style="{StaticResource StyleForAllButtonOnItemWindow}">Переместить предметы</Button>
+                                Style="{StaticResource StyleForCreateMovementButton}"
+                                Command="{Binding CreateMovementClick}">Переместить предметы</Button>
                         <!--таблица со списком предметов-->
                         <DataGrid x:Name="MainGrid" Grid.Row="2"
                                   BorderThickness="0"
                                   IsReadOnly="True"
+                                  SelectionMode = "Single"
+                                  SelectionUnit="FullRow"
                                   AutoGenerateColumns = "False"
+                                  SelectedItem="{Binding SelectedItemInDataGrid, Mode=TwoWay}"
                                   ItemsSource="{Binding ItemsList}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Номер предмета" Binding="{Binding Path=ObjectId}" Width="1*"/>

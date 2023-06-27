@@ -1,5 +1,9 @@
 ﻿using ProjectBOX.Authorization.LoginUC;
 using ProjectBOX.EntityFrameworkModelFiles;
+using ProjectBOX.ItemsWindowForms.CreateContainerForm;
+using ProjectBOX.ItemsWindowForms.CreateItemForm;
+using ProjectBOX.ItemsWindowForms.CreateItemMoveForm;
+using ProjectBOX.ItemsWindowForms.EditingItemForm;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -43,7 +47,11 @@ namespace ProjectBOX.ItemsWindow
                 _category = value;
                 OnPropertyChanged("Category");
                 ClearButtonSeeallObject();
-                if (Category is ContainerDatum container) ReloadItemsList(container);
+                if (Category is ContainerDatum container)
+                { 
+                    ReloadItemsList(container);
+                    Application.Current.Resources["SelectedContainerID"] = container.ContainerId;
+                }
             }
         }
         #endregion
@@ -100,6 +108,24 @@ namespace ProjectBOX.ItemsWindow
             }
         }
         #endregion
+        #region SelectedItemInDataGrid CompleteTask
+        private CompleteTask _selectedItemInDataGrid;
+
+        public CompleteTask SelectedItemInDataGrid
+        {
+            get => _selectedItemInDataGrid;
+            set
+            {
+                _selectedItemInDataGrid = value;
+                OnPropertyChanged("SelectedItemInDataGrid");
+                if(value is not null)
+                {
+                    Application.Current.Resources["SelectedItemID"] = _selectedItemInDataGrid.ObjectId;
+                    (new EditingItemFormView()).ShowDialog();
+                }
+            }
+        }
+        #endregion
 
         #region UserClickOnSeeAllObjectButton RelayCommand
         private RelayCommand _userClickOnSeeAllObjectButton;
@@ -112,6 +138,51 @@ namespace ProjectBOX.ItemsWindow
                   (_userClickOnSeeAllObjectButton = new RelayCommand(obj =>
                   {
                       UserChoseSeeAllObject = true;
+                  }));
+            }
+        }
+        #endregion
+        #region CreateContainerClick RelayCommand
+        private RelayCommand _createContainerClick;
+
+        public RelayCommand CreateContainerClick
+        {
+            get
+            {
+                return _createContainerClick ??
+                  (_createContainerClick = new RelayCommand(obj =>
+                  {
+                      (new CreateContainerFormView()).ShowDialog();
+                  }));
+            }
+        }
+        #endregion
+        #region CreateNewItemClick RelayCommand
+        private RelayCommand _createNewItemClick;
+
+        public RelayCommand CreateNewItemClick
+        {
+            get
+            {
+                return _createNewItemClick ??
+                  (_createNewItemClick = new RelayCommand(obj =>
+                  {
+                      (new CreateItemFormView()).ShowDialog();
+                  }));
+            }
+        }
+        #endregion
+        #region CreateMovementClick RelayCommand
+        private RelayCommand _createMovementClick;
+
+        public RelayCommand CreateMovementClick
+        {
+            get
+            {
+                return _createMovementClick ??
+                  (_createMovementClick = new RelayCommand(obj =>
+                  {
+                      (new CreateItemMoveFormView()).ShowDialog();
                   }));
             }
         }

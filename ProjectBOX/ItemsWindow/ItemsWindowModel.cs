@@ -33,6 +33,7 @@ namespace ProjectBOX.ItemsWindow
             }
         }
 
+        #region GetAllItemsFromCategory ObservableCollection <CompleteTask>
         public ObservableCollection <CompleteTask> GetAllItemsFromCategory(ContainerDatum container)
         {
             using(ProjectBoxDbContext DB = new ProjectBoxDbContext())
@@ -46,6 +47,23 @@ namespace ProjectBOX.ItemsWindow
             using (ProjectBoxDbContext DB = new ProjectBoxDbContext())
             {
                 return new ObservableCollection<CompleteTask>(DB.CompleteTasks);
+            }
+        }
+        #endregion
+
+        public string? GetUserNameFromDataBase(int userID)
+        {
+            using (ProjectBoxDbContext DB = new())
+            {
+                return DB.UserData.Find(userID)?.UserName;
+            }
+        }
+
+        public string? GetUserEmailFromDataBase(int userID)
+        {
+            using (ProjectBoxDbContext DB = new())
+            {
+                return DB.UserData.Find(userID)?.Email;
             }
         }
     }

@@ -126,7 +126,8 @@
                 <RowDefinition Height = "30"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <UserAreaUC:UserAreaUCView Email="Meserygamer@gmail.com" NickName="Mesery"></UserAreaUC:UserAreaUCView>
+            <UserAreaUC:UserAreaUCView Email="{Binding UserEmail, Mode=TwoWay}"
+                                       NickName="{Binding UserName, Mode=TwoWay}"/>
             <Border Grid.Row="2" Style="{StaticResource CatygoryBackgroundBorderStyle}">
                 <Grid Margin="0,10,10,15">
                     <Grid.RowDefinitions>

@@ -14,26 +14,11 @@ namespace ProjectBOX.ItemsWindow
 {
     public class ItemsWindowViewModel : INotifyPropertyChanged
     {
+        #region UserChoseSeeAllObject bool
         private bool _userChoseSeeAllObject;
-        private RelayCommand _userClickOnSeeAllObjectButton;
-        private object? _category;
-        private ObservableCollection<ContainerDatum> _categoriesList = new ObservableCollection<ContainerDatum>();
-        private ObservableCollection<CompleteTask> _itemsList = new ObservableCollection<CompleteTask>();
-
-        public RelayCommand UserClickOnSeeAllObjectButton
-        {
-            get
-            {
-                return _userClickOnSeeAllObjectButton ??
-                  (_userClickOnSeeAllObjectButton = new RelayCommand(obj =>
-                  {
-                      UserChoseSeeAllObject = true;
-                  }));
-            }
-        }
 
         public bool UserChoseSeeAllObject
-        { 
+        {
             get => _userChoseSeeAllObject;
             set
             {
@@ -46,6 +31,9 @@ namespace ProjectBOX.ItemsWindow
                 }
             }
         }
+        #endregion
+        #region Category object?
+        private object? _category;
 
         public object? Category
         {
@@ -55,9 +43,39 @@ namespace ProjectBOX.ItemsWindow
                 _category = value;
                 OnPropertyChanged("Category");
                 ClearButtonSeeallObject();
-                if(Category is ContainerDatum container) ReloadItemsList(container);
+                if (Category is ContainerDatum container) ReloadItemsList(container);
             }
         }
+        #endregion
+        #region UserName string?
+        private string? _userName;
+
+        public string? UserName
+        {
+            get => _userName;
+            set
+            {
+                _userName = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+        #region UserEmail string?
+        private string? _userEmail;
+
+        public string? UserEmail
+        {
+            get => _userEmail;
+            set
+            {
+                _userEmail = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region CategoriesList ObservableCollection<ContainerDatum>
+        private ObservableCollection<ContainerDatum> _categoriesList = new ObservableCollection<ContainerDatum>();
 
         public ObservableCollection<ContainerDatum> CategoriesList
         {
@@ -68,6 +86,9 @@ namespace ProjectBOX.ItemsWindow
                 OnPropertyChanged("CategoriesList");
             }
         }
+        #endregion
+        #region ItemsList ObservableCollection<CompleteTask>
+        private ObservableCollection<CompleteTask> _itemsList = new ObservableCollection<CompleteTask>();
 
         public ObservableCollection<CompleteTask> ItemsList
         {
@@ -78,7 +99,25 @@ namespace ProjectBOX.ItemsWindow
                 OnPropertyChanged("ItemsList");
             }
         }
+        #endregion
 
+        #region UserClickOnSeeAllObjectButton RelayCommand
+        private RelayCommand _userClickOnSeeAllObjectButton;
+
+        public RelayCommand UserClickOnSeeAllObjectButton
+        {
+            get
+            {
+                return _userClickOnSeeAllObjectButton ??
+                  (_userClickOnSeeAllObjectButton = new RelayCommand(obj =>
+                  {
+                      UserChoseSeeAllObject = true;
+                  }));
+            }
+        }
+        #endregion
+
+        #region ClearMethodsOfCategoryChose
         private void ClearSelectedCategory()
         {
             _category = null;
@@ -90,17 +129,38 @@ namespace ProjectBOX.ItemsWindow
             _userChoseSeeAllObject = false;
             OnPropertyChanged("UserChoseSeeAllObject");
         }
+        #endregion
 
         public ItemsWindowViewModel()
         {
+            SetUserAreaData();
             ReloadCategoriesAsync();
         }
+
+        #region SetUserDataMethods
+        private void SetUserAreaData()
+        {
+            SetUserAreaName();
+            SetUserEmail();
+        }
+
+        private async void SetUserAreaName()
+        {
+            await Task.Run(() => {UserName = ItemsWindowModel.GetItemsWindowModel().GetUserNameFromDataBase((int)Application.Current.Resources["UserID"]);});
+        }
+
+        private async void SetUserEmail()
+        {
+            await Task.Run(() => { UserEmail = ItemsWindowModel.GetItemsWindowModel().GetUserEmailFromDataBase((int)Application.Current.Resources["UserID"]);});
+        }
+        #endregion
 
         private async void ReloadCategoriesAsync()
         {
             await Task.Run(() => {CategoriesList = ItemsWindowModel.GetItemsWindowModel().GetAllContainerFromDB();});
         }
 
+        #region ReloadItemsList async void
         private async void ReloadItemsList()
         {
             await Task.Run(() => { ItemsList = ItemsWindowModel.GetItemsWindowModel().GetAllItemsFromCategory();});
@@ -110,6 +170,7 @@ namespace ProjectBOX.ItemsWindow
         {
             await Task.Run(() => { ItemsList = ItemsWindowModel.GetItemsWindowModel().GetAllItemsFromCategory(container); });
         }
+        #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

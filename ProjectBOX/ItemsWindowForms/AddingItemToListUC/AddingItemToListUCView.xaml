@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ProjectBOX.ItemsWindowForms.AddingItemToListUC.AddingItemToListUCView"
+﻿<UserControl x:Name="userControl" x:Class="ProjectBOX.ItemsWindowForms.AddingItemToListUC.AddingItemToListUCView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ProjectBOX.ItemsWindowForms.AddingItemToListUC"
              mc:Ignorable="d" 
              d:DesignHeight="310" d:DesignWidth="460" Background="White"
-    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
+             xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <UserControl.Resources>
         <Style x:Key="AddButton" TargetType ="Button">
             <Setter Property="Background" Value="#36638D"></Setter>
@@ -293,7 +293,7 @@
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="260"></RowDefinition>
         </Grid.RowDefinitions>
-        <local:AddingItemToListUCViewModel x:Name="DC"></local:AddingItemToListUCViewModel>
+        <local:AddingItemToListUCViewModel x:Name="DC" ListOfMovedItems="{Binding ListOfSelectedItemsOnMove, ElementName=userControl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></local:AddingItemToListUCViewModel>
         <Grid Height="40" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="375"></ColumnDefinition>

@@ -63,12 +63,13 @@
             <TextBlock Grid.Row="0" Style="{StaticResource FontForSubtitlesTextBlockStyle}">
                     Список перемещаемых предметов</TextBlock>
             <ContentControl Grid.Row="1" Margin="0 10 0 0" Height="310">
-                <ListOfTransportingItems:AddingItemToListUCView></ListOfTransportingItems:AddingItemToListUCView>
+                <ListOfTransportingItems:AddingItemToListUCView ListOfSelectedItemsOnMove="{Binding DataContext.ListOfMovedItems, ElementName=window, Mode=TwoWay}" ></ListOfTransportingItems:AddingItemToListUCView>
             </ContentControl>
         </Grid>
         <Button Grid.Row="4"
                 Width="350" Height="60"
-                Style="{StaticResource ConfirmButtonStyle}">
+                Style="{StaticResource ConfirmButtonStyle}"
+                Command="{Binding ClickOnCreateMoveButton}">
             Подтверждение</Button>
     </Grid>
 </Window>

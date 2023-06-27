@@ -81,8 +81,8 @@ namespace ProjectBOX.ItemsWindowForms.DateTimeUC
         }
         #endregion
 
-        public ObservableCollection<int> Hours {get; } = new ObservableCollection<int>(Enumerable.Range(1, 24));
-        public ObservableCollection<int> Minutes {get; } = new ObservableCollection<int>(Enumerable.Range(1, 60));
+        public ObservableCollection<int> Hours {get; } = new ObservableCollection<int>(Enumerable.Range(0, 23));
+        public ObservableCollection<int> Minutes {get; } = new ObservableCollection<int>(Enumerable.Range(0, 60));
 
         private void UpdateDateTime()
         {

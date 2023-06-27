@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ProjectBOX.EntityFrameworkModelFiles;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,8 +22,20 @@ namespace ProjectBOX.ItemsWindowForms.AddingItemToListUC
     /// </summary>
     public partial class AddingItemToListUCView : UserControl
     {
+        #region ListOfSelectedItemsOnMove ObservableCollection<ObjectDatum> DependencyProperty
+        public static readonly DependencyProperty ListOfSelectedItemsOnMoveProperty =
+            DependencyProperty.Register("ListOfSelectedItemsOnMove", typeof(ObservableCollection<ObjectDatum>), typeof(AddingItemToListUCView));
+
+        public ObservableCollection<ObjectDatum> ListOfSelectedItemsOnMove
+        {
+            get => (ObservableCollection<ObjectDatum>)GetValue(ListOfSelectedItemsOnMoveProperty);
+            set => SetValue(ListOfSelectedItemsOnMoveProperty, value);
+        }
+        #endregion
+
         public AddingItemToListUCView()
         {
+            ListOfSelectedItemsOnMove = new ObservableCollection<ObjectDatum>();
             InitializeComponent();
         }
     }

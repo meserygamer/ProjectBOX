@@ -15,17 +15,29 @@ namespace ProjectBOX.ItemsWindowForms.AddingItemToListUC
     public class AddingItemToListUCViewModel : FrameworkElement, INotifyPropertyChanged
     {
         #region ListOfMovedItems ObservableCollection<ObjectDatum>
-        private ObservableCollection<ObjectDatum> _listOfMovedItems = new ObservableCollection<ObjectDatum>();
+        //private ObservableCollection<ObjectDatum> _listOfMovedItems = new ObservableCollection<ObjectDatum>();
+
+        //public ObservableCollection<ObjectDatum> ListOfMovedItems
+        //{
+        //    get { return _listOfMovedItems; }
+        //    set { 
+        //        _listOfMovedItems = value;
+        //        OnPropertyChanged("ListOfMovedItems");
+        //    }
+        //}
+        #endregion
+
+        #region ListOfMovedItems ObservableCollection<ObjectDatum> DependencyProperty
+        public static readonly DependencyProperty ListOfMovedItemsProperty =
+            DependencyProperty.Register("ListOfMovedItems", typeof(ObservableCollection<ObjectDatum>), typeof(AddingItemToListUCViewModel));
 
         public ObservableCollection<ObjectDatum> ListOfMovedItems
         {
-            get { return _listOfMovedItems; }
-            set { 
-                _listOfMovedItems = value;
-                OnPropertyChanged("ListOfMovedItems");
-            }
+            get => (ObservableCollection<ObjectDatum>)GetValue(ListOfMovedItemsProperty);
+            set => SetValue(ListOfMovedItemsProperty, value);
         }
         #endregion
+
         #region ListOfAllItems ObservableCollection<ObjectDatum>
         private ObservableCollection<ObjectDatum> _listOfAllItems;
 
@@ -54,6 +66,7 @@ namespace ProjectBOX.ItemsWindowForms.AddingItemToListUC
         }
         #endregion
 
+        #region ClickOnAddButton RelayCommand
         private RelayCommand _clickOnAddButton;
 
         public RelayCommand ClickOnAddButton
@@ -71,9 +84,11 @@ namespace ProjectBOX.ItemsWindowForms.AddingItemToListUC
                   }));
             }
         }
+        #endregion
 
         public AddingItemToListUCViewModel()
         {
+            ListOfMovedItems = new ObservableCollection<ObjectDatum>();
             AddingItemToListInteractionsWithDataBase.GetExampler().ItemsListWasFormed += FilingListOfAllItems;
             AddingItemToListInteractionsWithDataBase.GetExampler().FormedListOfAllItemsAsync();
         }

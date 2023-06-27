@@ -3,4 +3,5 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
     <system:Int32 x:Key = "UserID">1</system:Int32>
     <system:Int32 x:Key = "SelectedItemID">5</system:Int32>
+    <system:Int32 x:Key = "SelectedContainerID">1</system:Int32>
 </ResourceDictionary>

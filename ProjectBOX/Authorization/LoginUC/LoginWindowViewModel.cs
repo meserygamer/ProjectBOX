@@ -26,13 +26,23 @@ namespace ProjectBOX.Authorization.LoginUC
                 return _loginCommand ??
                   (_loginCommand = new RelayCommand(obj =>
                   {
-                      if((new AuthorizationData(_login, _securePassword)).Authorization().CheckUser())
-                      {
-                          Application.Current.Resources.Add("LoginOfCurrentUser", _login);
-                          //закрытие окна и переход далее
-                      }
+                      int? UserID = (new AuthorizationData(_login, _securePassword)).Authorization().CheckUser();
+                      if (UserID is not null) LoginWasSuccesfull((int)UserID);
+                      else LoginWasFailed();
                   }));
             }
+        }
+
+        private void LoginWasFailed()
+        {
+            MessageBox.Show("Неправильно введен логин или пароль");
+        }
+
+        private void LoginWasSuccesfull(int IDAuthorizatedUser)
+        {
+            Application.Current.Resources["UserID"] = IDAuthorizatedUser;
+            (new ItemsWindow.ItemsWindowView()).Show();
+            Application.Current.Windows[0].Close();
         }
 
         public string Login

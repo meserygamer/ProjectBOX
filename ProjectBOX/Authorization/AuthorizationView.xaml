@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ProjectBOX.Authorization"
         xmlns:LoginWindow="clr-namespace:ProjectBOX.Authorization.LoginUC"
         xmlns:RegistrationWindow="clr-namespace:ProjectBOX.Authorization.RegistrationUC"
-        mc:Ignorable="d"
+        mc:Ignorable="d" WindowState="Maximized"
         Title="Authorization" Height="1080" Width="1920">
     <Window.Resources>
         <local:AuthorizationViewModel x:Key ="DCA" CurrentScreen="Login"></local:AuthorizationViewModel>

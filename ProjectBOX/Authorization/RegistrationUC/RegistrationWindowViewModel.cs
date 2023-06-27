@@ -108,7 +108,7 @@ namespace ProjectBOX.Authorization.RegistrationUC
                       }
                       if(!RegistrationValidator.CheckOnLoginAvailability().Validate())
                       {
-                          MessageBox.Show("Введенный логин не занят другим пользователем!");
+                          MessageBox.Show("Введенный логин занят другим пользователем!");
                           return;
                       }
                       if (!RegistrationValidator.CheckPasswordOnValid().Validate())
@@ -122,7 +122,7 @@ namespace ProjectBOX.Authorization.RegistrationUC
                           MessageBox.Show("Введенные пароли не идентичны!");
                           return;
                       }
-                      //Здесь должен быть метод внесения пользователя в базу данных
+                      InteractionsRegistrationUCWithDB.GetExamler().AddUserInDataBase(Login,Password);
                       CleanAllFields();
                       MessageBox.Show("Аккаунт был успешно зарегистрирован! Теперь вы можете авторизироваться в системе");
                   }));

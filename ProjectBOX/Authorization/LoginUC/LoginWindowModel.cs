@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectBOX.EntityFrameworkModelFiles;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -9,6 +10,9 @@ namespace ProjectBOX.Authorization.LoginUC
 {
     public class Authorization
     {
+        public event Action<int> LoginWasSuccesfull;
+        public event Action LoginWasFailed;
+
         private AuthorizationData _authData;
 
         public Authorization(AuthorizationData authorizationData)
@@ -16,22 +20,29 @@ namespace ProjectBOX.Authorization.LoginUC
             _authData = authorizationData;
         }
 
-        public bool CheckUser()
+        public int? CheckUser()
         {
-            //Здесь должен быть код проверки из базы
-            return true;
+            using (ProjectBoxDbContext DB = new())
+            {
+                if (DB.AuthorizationData.Find(_authData.Login) is not null
+                && (DB.AuthorizationData.Find(_authData.Login)).SecurePasssword == _authData.Password)
+                {
+                    return DB.AuthorizationData.Find(_authData.Login).UserId;
+                }
+                else return null;
+            }
         }
     }
 
     public class AuthorizationData
     {
-        private string _login;
-        private string _password;
+        public string Login { get; private set; }
+        public string Password { get; private set; }
 
         public AuthorizationData(string Login, string Password)
         {
-            _login = Login;
-            _password = Password;
+            this.Login = Login;
+            this.Password = Password;
         }
 
         public Authorization Authorization() => new Authorization(this);

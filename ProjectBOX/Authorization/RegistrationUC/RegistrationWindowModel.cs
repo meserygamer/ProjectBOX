@@ -1,6 +1,8 @@
-﻿using System;
+﻿using ProjectBOX.EntityFrameworkModelFiles;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -19,7 +21,10 @@ namespace ProjectBOX.Authorization.RegistrationUC
 
         public Validator CheckOnLoginAvailability()
         {
-            //Проверка на существование логина в базе
+            using (ProjectBoxDbContext DB = new())
+            {
+                if(DB.AuthorizationData.Find(_registrationData.Login) is not null) _valid = false;
+            }
             return this;
         }
 
@@ -63,6 +68,34 @@ namespace ProjectBOX.Authorization.RegistrationUC
         public Validator Validator()
         {
             return new Validator(this);
+        }
+    }
+
+    public class InteractionsRegistrationUCWithDB
+    {
+        private static InteractionsRegistrationUCWithDB _singleton;
+
+        public InteractionsRegistrationUCWithDB() { }
+
+        public static InteractionsRegistrationUCWithDB GetExamler()
+        {
+            return _singleton ?? (_singleton = new InteractionsRegistrationUCWithDB());
+        }
+
+        public async void AddUserInDataBase(string Login, string Password)
+        {
+            await Task.Run(() => 
+            {
+                using (ProjectBoxDbContext DB = new())
+                {
+                    using (SHA256 hash = SHA256.Create())
+                    {
+                        Password = Convert.ToHexString(hash.ComputeHash(Encoding.UTF8.GetBytes(Password)));
+                    }
+                    DB.UserData.Add(new UserDatum {UserName = Login, AuthorizationDatum = new AuthorizationDatum {Login = Login, SecurePasssword = Password}});
+                    DB.SaveChanges();
+                }
+            });
         }
     }
 }

@@ -12,7 +12,10 @@ namespace ProjectBOX.ItemsWindowForms.CreateContainerForm
 {
     public class CreateContainerFormViewModel : INotifyPropertyChanged
     {
-        #region CategoryName string
+        /// <summary>
+        /// Название контейнера
+        /// </summary>
+        #region public string CategoryName
         private string _categoryName;
 
         public string CategoryName
@@ -24,7 +27,10 @@ namespace ProjectBOX.ItemsWindowForms.CreateContainerForm
             }
         }
         #endregion
-        #region CategoryDescription string
+        /// <summary>
+        /// Описание контейнера
+        /// </summary>
+        #region public string CategoryDescription
         private string _categoryDescription;
 
         public string CategoryDescription
@@ -38,7 +44,10 @@ namespace ProjectBOX.ItemsWindowForms.CreateContainerForm
         }
         #endregion
 
-        #region CreateCategoryClick RelayCommand
+        /// <summary>
+        /// Создание окна контейнер
+        /// </summary>
+        #region public RelayCommand CreateCategoryClick
         private RelayCommand _createCategoryClick;
 
         public RelayCommand CreateCategoryClick

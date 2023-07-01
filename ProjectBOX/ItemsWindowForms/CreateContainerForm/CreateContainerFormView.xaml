@@ -19,6 +19,7 @@
             <RowDefinition Height="310"></RowDefinition>
             <RowDefinition Height="110"></RowDefinition>
         </Grid.RowDefinitions>
+        <!--Заголовок-->
         <TextBlock Style="{StaticResource MainLabelTextBlockStyle}"
                    Grid.Row="0">Создание "контейнера"</TextBlock>
         <Grid Grid.Row="1">
@@ -30,6 +31,7 @@
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Style="{StaticResource FontForSubtitlesTextBlockStyle}">
                     Название "контейнера"</TextBlock>
+            <!--Название контейнера-->
             <Watermarks:WaterMarkTextBox Grid.Row="1"
                          Style="{StaticResource FieldsStyleTextBox}"
                          Height="40"
@@ -38,6 +40,7 @@
                          Text="{Binding CategoryName}"></Watermarks:WaterMarkTextBox>
             <TextBlock Grid.Row="2" Style="{StaticResource FontForSubtitlesTextBlockStyle}">
                     Описание "контейнера"</TextBlock>
+            <!--Описание контейнера-->
             <Watermarks:WaterMarkTextBox Grid.Row="3"
                          Style="{StaticResource FieldsStyleTextBox}"
                          Margin="0 10 0 0"
@@ -45,6 +48,7 @@
                          WatermarkText='Введите описание "контейнера"...'
                          Text="{Binding CategoryDescription}"></Watermarks:WaterMarkTextBox>
         </Grid>
+        <!--Подтверждение создания предмета-->
         <Button Grid.Row="2"
                 Width="350" Height="60"
                 Style="{StaticResource ConfirmButtonStyle}"

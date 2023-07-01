@@ -11,6 +11,9 @@ using System.Security.Cryptography;
 
 namespace ProjectBOX.Authorization
 {
+    /// <summary>
+    /// Hint TextBox
+    /// </summary>
     public class WaterMarkTextBox : TextBox
     {
         #region Fields
@@ -52,8 +55,12 @@ namespace ProjectBOX.Authorization
         #endregion
     }
 
+    /// <summary>
+    /// Behavior поля пароля при логине
+    /// </summary>
     public class PasswordBoxBehaviorForLogin : PasswordBoxBehavior
     {
+        #region public string SecurePassword DependencyProperty
         public static readonly DependencyProperty SecurePasswordProperty;
 
         static PasswordBoxBehaviorForLogin()
@@ -66,6 +73,7 @@ namespace ProjectBOX.Authorization
             get { return (string)GetValue(SecurePasswordProperty); }
             set { SetValue(SecurePasswordProperty, value); }
         }
+        #endregion
 
         protected override void AssociatedObject_PasswordChanged(object sender, RoutedEventArgs e)
         {
@@ -73,6 +81,11 @@ namespace ProjectBOX.Authorization
             SecurePassword = CalculateSecurePassword(AssociatedObject.Password);
         }
 
+        /// <summary>
+        /// Функция хэширования пароля
+        /// </summary>
+        /// <param name="CurrentPassword">пароль</param>
+        /// <returns>хэшпароля</returns>
         protected string CalculateSecurePassword(string CurrentPassword)
         {
             using (SHA256 hash = SHA256.Create())
@@ -82,10 +95,13 @@ namespace ProjectBOX.Authorization
         }
     }
 
+    /// <summary>
+    /// Behavior поля пароля при регистрации
+    /// </summary>
     public class PasswordBoxBehaviorForRegistration : PasswordBoxBehavior
     {
+        #region public string UserPasswordForRegistration DependencyProperty
         public static readonly DependencyProperty UserPasswordForRegistrationProperty;
-        private bool _skipUpdate;
 
         static PasswordBoxBehaviorForRegistration()
         {
@@ -97,6 +113,9 @@ namespace ProjectBOX.Authorization
             get { return (string)GetValue(UserPasswordForRegistrationProperty); }
             set { SetValue(UserPasswordForRegistrationProperty, value); }
         }
+        #endregion
+
+        private bool _skipUpdate;
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
@@ -122,28 +141,30 @@ namespace ProjectBOX.Authorization
         }
     }
 
+    /// <summary>
+    /// Behavior поля пароля
+    /// </summary>
     public class PasswordBoxBehavior : Behavior<PasswordBox>
     {
-        public static readonly DependencyProperty LenghPasswordProperty;
-        public static readonly DependencyProperty KeyBoardFocusProperty;
-
-        static PasswordBoxBehavior()
-        {
-            KeyBoardFocusProperty = DependencyProperty.Register("KeyBoardFocus", typeof(bool), typeof(PasswordBoxBehavior));
-            LenghPasswordProperty = DependencyProperty.Register("LenghPassword", typeof(int?), typeof(PasswordBoxBehavior));
-        }
+        #region public int? LenghPassword DependencyProperty
+        public static readonly DependencyProperty LenghPasswordProperty = DependencyProperty.Register("LenghPassword", typeof(int?), typeof(PasswordBoxBehavior));
 
         public int? LenghPassword
         {
             get { return (int?)GetValue(LenghPasswordProperty); }
             set { SetValue(LenghPasswordProperty, value); }
         }
+        #endregion
+
+        #region public bool KeyBoardFocus DependencyProperty
+        public static readonly DependencyProperty KeyBoardFocusProperty = DependencyProperty.Register("KeyBoardFocus", typeof(bool), typeof(PasswordBoxBehavior));
 
         public bool KeyBoardFocus
         {
             get { return (bool)GetValue(KeyBoardFocusProperty); }
             set { SetValue(KeyBoardFocusProperty, value); }
         }
+        #endregion
 
         protected override void OnAttached()
         {
@@ -179,6 +200,11 @@ namespace ProjectBOX.Authorization
             base.OnPropertyChanged(e);
         }
 
+        /// <summary>
+        /// Расчет длины пароля
+        /// </summary>
+        /// <param name="CurrentPassword">Пароль</param>
+        /// <returns>Длина пароля</returns>
         protected int? CalculateLenghPassword(string CurrentPassword)
         {
             if (CurrentPassword is null)

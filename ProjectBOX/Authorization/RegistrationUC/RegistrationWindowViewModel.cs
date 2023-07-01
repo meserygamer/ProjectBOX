@@ -13,15 +13,12 @@ namespace ProjectBOX.Authorization.RegistrationUC
 {
     public class RegistrationWindowViewModel : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Длина пароля для подсказки
+        /// </summary>
+        #region public int? LenghPassword
         private int? _lenghPassword;
-        private bool _keyBoardFocusStatusOnPassword;
-        private int? _lenghConfirmPassword;
-        private bool _keyBoardFocusStatusOnConfirmPassword;
-        private string _login;
-        private string _password;
-        private string _confirmPassword;
-        private RelayCommand _registrationCommand;
-        
+
         public int? LenghPassword
         {
             get => _lenghPassword;
@@ -31,6 +28,13 @@ namespace ProjectBOX.Authorization.RegistrationUC
                 OnPropertyChanged("LenghPassword");
             }
         }
+        #endregion
+
+        /// <summary>
+        /// Значение фокуса пользователя на поле пароля, для подсказки
+        /// </summary>
+        #region public bool KeyBoardFocusStatusOnPassword
+        private bool _keyBoardFocusStatusOnPassword;
 
         public bool KeyBoardFocusStatusOnPassword
         {
@@ -41,6 +45,13 @@ namespace ProjectBOX.Authorization.RegistrationUC
                 OnPropertyChanged("KeyBoardFocusStatusOnPassword");
             }
         }
+        #endregion
+
+        /// <summary>
+        /// Длина подтвержденного пароля для подсказки
+        /// </summary>
+        #region public int? LenghConfirmPassword
+        private int? _lenghConfirmPassword;
 
         public int? LenghConfirmPassword
         {
@@ -51,6 +62,13 @@ namespace ProjectBOX.Authorization.RegistrationUC
                 OnPropertyChanged("LenghConfirmPassword");
             }
         }
+        #endregion
+
+        /// <summary>
+        /// Значение фокуса пользователя на поле подтвержденного пароля, для подсказки
+        /// </summary>
+        #region public bool KeyBoardFocusStatusOnConfirmPassword
+        private bool _keyBoardFocusStatusOnConfirmPassword;
 
         public bool KeyBoardFocusStatusOnConfirmPassword
         {
@@ -61,6 +79,13 @@ namespace ProjectBOX.Authorization.RegistrationUC
                 OnPropertyChanged("KeyBoardFocusStatusOnConfirmPassword");
             }
         }
+        #endregion
+
+        /// <summary>
+        /// Хранит введенный пользователем логин
+        /// </summary>
+        #region public string Login
+        private string _login;
 
         public string Login
         {
@@ -71,6 +96,13 @@ namespace ProjectBOX.Authorization.RegistrationUC
                 OnPropertyChanged("Login");
             }
         }
+        #endregion
+
+        /// <summary>
+        /// Хранит введенный пользователем пароль
+        /// </summary>
+        #region public string Password
+        private string _password;
 
         public string Password
         {
@@ -81,6 +113,13 @@ namespace ProjectBOX.Authorization.RegistrationUC
                 OnPropertyChanged("Password");
             }
         }
+        #endregion
+
+        /// <summary>
+        /// Хранит введенный пользователем подтвержденный пароль
+        /// </summary>
+        #region public string ConfirmPassword
+        private string _confirmPassword;
 
         public string ConfirmPassword
         {
@@ -91,6 +130,13 @@ namespace ProjectBOX.Authorization.RegistrationUC
                 OnPropertyChanged("ConfirmPassword");
             }
         }
+        #endregion
+
+        /// <summary>
+        /// Действия в случае нажатия на кнопку регистрации
+        /// </summary>
+        #region public RelayCommand RegistrationCommand
+        private RelayCommand _registrationCommand;
 
         public RelayCommand RegistrationCommand
         {
@@ -122,13 +168,17 @@ namespace ProjectBOX.Authorization.RegistrationUC
                           MessageBox.Show("Введенные пароли не идентичны!");
                           return;
                       }
-                      InteractionsRegistrationUCWithDB.GetExamler().AddUserInDataBase(Login,Password);
+                      InteractionsRegistrationUCWithDB.GetExamler().AddUserInDataBaseAsync(Login,Password);
                       CleanAllFields();
                       MessageBox.Show("Аккаунт был успешно зарегистрирован! Теперь вы можете авторизироваться в системе");
                   }));
             }
         }
+        #endregion
 
+        /// <summary>
+        /// Метод очистки всех полей
+        /// </summary>
         private void CleanAllFields()
         {
             Login = "";
@@ -136,16 +186,22 @@ namespace ProjectBOX.Authorization.RegistrationUC
             ConfirmPassword = "";
         }
 
+        #region INotifyPropertyChanged Realize
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
+        #endregion
     }
 
     public partial class RegistrationWindowView
     {
+        /// <summary>
+        /// Для хранения действий по нажатию на гиперссылку
+        /// </summary>
+        #region public RelayCommand HyperLinkClick DependencyProperty
         public static readonly DependencyProperty HyperLinkClickProperty = DependencyProperty.Register("HyperLinkClick", typeof(RelayCommand), typeof(RegistrationWindowView));
 
         public RelayCommand HyperLinkClick
@@ -153,5 +209,6 @@ namespace ProjectBOX.Authorization.RegistrationUC
             get => (RelayCommand)GetValue(HyperLinkClickProperty);
             set => SetValue(HyperLinkClickProperty, value);
         }
+        #endregion
     }
 }

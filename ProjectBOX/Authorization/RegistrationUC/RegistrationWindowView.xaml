@@ -9,7 +9,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="630" d:DesignWidth="500" Background="White">
     <UserControl.Resources>
+        <!--DataContext-->
         <local:RegistrationWindowViewModel x:Key="DC"></local:RegistrationWindowViewModel>
+        <!--Стиль поля пароля-->
         <Style x:Key="PasswordField" BasedOn="{StaticResource MainStyleForFields}" TargetType="PasswordBox">
             <Setter Property="Template">
                 <Setter.Value>
@@ -59,6 +61,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--Стиль поля подтвержденного пароля-->
         <Style x:Key="ConfirmPasswordField" BasedOn="{StaticResource MainStyleForFields}" TargetType="PasswordBox">
             <Setter Property="Template">
                 <Setter.Value>
@@ -113,11 +116,13 @@
         <StackPanel>
             <TextBlock Text="Регистрация" Style ="{StaticResource ResourceKey=StyleForMainText}"></TextBlock>
             <StackPanel Margin="0 87 0 0" >
+                <!--Поле авторизации-->
                 <StackPanel>
                     <TextBlock Text="Логин" Style="{StaticResource ResourceKey=StyleForHeaderOfFields}" Margin="0,0,0,12"></TextBlock>
                     <Watermarks:WaterMarkTextBox Text="{Binding Login, Mode=TwoWay}" Style="{StaticResource LoginField}">
                     </Watermarks:WaterMarkTextBox>
                 </StackPanel>
+                <!--Поле пароля-->
                 <StackPanel Margin = "0 39 0 0">
                     <TextBlock Text="Пароль" Style="{StaticResource ResourceKey=StyleForHeaderOfFields}" Margin="0,0,0,12"></TextBlock>
                     <PasswordBox Style="{StaticResource PasswordField}">
@@ -128,6 +133,9 @@
                             </Watermarks:PasswordBoxBehaviorForRegistration>
                         </i:Interaction.Behaviors>
                     </PasswordBox>
+                </StackPanel>
+                <!--Поле подтвержденного пароля-->
+                <StackPanel>
                     <TextBlock Text="Подтверждение пароля" Style="{StaticResource ResourceKey=StyleForHeaderOfFields}" Margin="0,39,0,12"></TextBlock>
                     <PasswordBox Style="{StaticResource ConfirmPasswordField}">
                         <i:Interaction.Behaviors>
@@ -137,6 +145,9 @@
                             </Watermarks:PasswordBoxBehaviorForRegistration>
                         </i:Interaction.Behaviors>
                     </PasswordBox>
+                </StackPanel>
+                <!--Кнопка и гиперссылка-->
+                <StackPanel>
                     <Button Margin="0 60 0 0" Command="{Binding RegistrationCommand}" Style="{StaticResource MainButton}">Зарегистрироваться</Button>
                     <ContentControl Margin="0 15 0 0" HorizontalAlignment="Center">
                         <Hyperlink Command="{Binding HyperLinkClick, ElementName=userControl}">У вас есть аккаунт?</Hyperlink>

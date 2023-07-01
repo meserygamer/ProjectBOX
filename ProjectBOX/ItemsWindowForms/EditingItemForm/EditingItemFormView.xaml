@@ -27,6 +27,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="110"></RowDefinition>
         </Grid.RowDefinitions>
+        <!--Заголовок-->
         <TextBlock Style="{StaticResource MainLabelTextBlockStyle}"
                    Grid.Row="0">Редактирование предмета</TextBlock>
         <Grid Grid.Row="1">
@@ -34,8 +35,8 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
+            <!--Картинка функционал-->
             <ContentControl Grid.Column="0">
-                <!--<Image:ItemPhotoUCView x:Name="PhotoUC" ByteArrayFormOfImage = "{Binding ItemImage, Mode=TwoWay, NotifyOnSourceUpdated = True, UpdateSourceTrigger=PropertyChanged}"></Image:ItemPhotoUCView>-->
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="270"></RowDefinition>
@@ -72,6 +73,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Style="{StaticResource FontForSubtitlesTextBlockStyle}">
                     Название предмета</TextBlock>
+                <!--Поле названия предмета-->
                 <Watermarks:WaterMarkTextBox Grid.Row="1"
                          Style="{StaticResource FieldsStyleTextBox}"
                          Height="40"
@@ -80,6 +82,7 @@
                          Text="{Binding ItemName, Mode=TwoWay}"></Watermarks:WaterMarkTextBox>
                 <TextBlock Grid.Row="2" Style="{StaticResource FontForSubtitlesTextBlockStyle}">
                     Описание предмета</TextBlock>
+                <!--Поле описания предмета-->
                 <Watermarks:WaterMarkTextBox Grid.Row="3"
                          Style="{StaticResource FieldsStyleTextBox}"
                          Margin="0 10 0 0"
@@ -88,6 +91,7 @@
                          Text="{Binding ItemDescription, Mode=TwoWay}"></Watermarks:WaterMarkTextBox>
             </Grid>
         </Grid>
+        <!--История перемещений предмета-->
         <Grid Margin="0 26 0 0" Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -108,6 +112,7 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
+        <!--Подтверждение редактирования-->
         <Button Grid.Row="3"
                 Width="350" Height="60"
                 Style="{StaticResource ConfirmButtonStyle}"

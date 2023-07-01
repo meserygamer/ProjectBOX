@@ -19,7 +19,10 @@ namespace ProjectBOX.ItemsWindowForms.EditingItemForm
 {
     public class EditingItemFormViewModel : INotifyPropertyChanged
     {
-        #region ItemName string
+        /// <summary>
+        /// Название предмета
+        /// </summary>
+        #region public string ItemName
         private string _itemName;
 
         public string ItemName
@@ -32,7 +35,10 @@ namespace ProjectBOX.ItemsWindowForms.EditingItemForm
             }
         }
         #endregion
-        #region ItemDescription string
+        /// <summary>
+        /// Описание предмета
+        /// </summary>
+        #region public string? ItemDescription
         private string? _itemDescription;
 
         public string? ItemDescription
@@ -45,7 +51,10 @@ namespace ProjectBOX.ItemsWindowForms.EditingItemForm
             }
         }
         #endregion
-        #region FileName string
+        /// <summary>
+        /// Путь к файлу с картинкой
+        /// </summary>
+        #region public string FileName
         private string _fileName;
 
         public string FileName
@@ -59,7 +68,10 @@ namespace ProjectBOX.ItemsWindowForms.EditingItemForm
         }
         #endregion
 
-        #region ItemImage byte[]
+        /// <summary>
+        /// Картинка в байт форме
+        /// </summary>
+        #region public byte[]? ItemImage
         private byte[]? _itemImage;
 
         public byte[]? ItemImage
@@ -73,7 +85,10 @@ namespace ProjectBOX.ItemsWindowForms.EditingItemForm
             }
         }
         #endregion
-        #region ImageOnBorder BitmapImage
+        /// <summary>
+        /// Битмап форма картинки
+        /// </summary>
+        #region public BitmapImage ImageOnBorder
         private BitmapImage _imageOnBorder;
 
         public BitmapImage ImageOnBorder
@@ -87,7 +102,10 @@ namespace ProjectBOX.ItemsWindowForms.EditingItemForm
         }
         #endregion
 
-        #region ObserverButtonClick RelayCommand
+        /// <summary>
+        /// Обработчик кнопки поиска картинки
+        /// </summary>
+        #region public RelayCommand ObserverButtonClick
         private RelayCommand _observerButtonClick;
 
         public RelayCommand ObserverButtonClick
@@ -106,7 +124,10 @@ namespace ProjectBOX.ItemsWindowForms.EditingItemForm
             }
         }
         #endregion
-        #region ConfirmItemChange RelayCommand
+        /// <summary>
+        /// Обработчик кнопки подтверждение изменения предмета
+        /// </summary>
+        #region public RelayCommand ConfirmItemChange
         private RelayCommand _confirmItemChange;
 
         public RelayCommand ConfirmItemChange
@@ -118,7 +139,7 @@ namespace ProjectBOX.ItemsWindowForms.EditingItemForm
                   {
                       if (new Validator(ItemName).CheckItemNameOnEmpty().Validation())
                       {
-                          _editingItemFormModel.ChangeDataAboutItemInDB(ItemName, ItemDescription, ItemImage);
+                          _editingItemFormModel.ChangeDataAboutItemInDBAsync(ItemName, ItemDescription, ItemImage);
                           ((EditingItemFormView)Application.Current.Windows[Application.Current.Windows.Count - 1]).DialogResult = true; ///
                       }
                       else
@@ -130,7 +151,10 @@ namespace ProjectBOX.ItemsWindowForms.EditingItemForm
         }
         #endregion
 
-        #region ItemHistoryChanged ObservableCollection<HistoryOfChangesObjectLocation>
+        /// <summary>
+        /// История изменений предмета
+        /// </summary>
+        #region public ObservableCollection<HistoryOfChangesObjectLocation>? ItemHistoryChanged
         private ObservableCollection<HistoryOfChangesObjectLocation>? _itemHistoryChanged;
 
         public ObservableCollection<HistoryOfChangesObjectLocation>? ItemHistoryChanged
@@ -144,18 +168,29 @@ namespace ProjectBOX.ItemsWindowForms.EditingItemForm
         }
         #endregion
 
+        /// <summary>
+        /// Model окна 
+        /// </summary>
         private EditingItemFormModel _editingItemFormModel;
 
+        /// <summary>
+        /// Конструктор ViewModel окна
+        /// </summary>
         public EditingItemFormViewModel()
         {
             if (Application.Current.Resources["SelectedItemID"] is Int32 SelectedItemID)
             {
                 _editingItemFormModel = new EditingItemFormModel(SelectedItemID);
                 _editingItemFormModel.NotifyEndOfDownloadDataAboutItem += SetStartZnachFromDB;
-                _editingItemFormModel.DownloadDataAboutItem();
+                _editingItemFormModel.DownloadDataAboutItemAsync();
             }
         }
 
+        /// <summary>
+        /// Создание битмап картинки из байт массива
+        /// </summary>
+        /// <param name="ByteArray">Байт массив</param>
+        /// <returns>Битмап форма картинки</returns>
         private BitmapImage CreateBitMapImageFromByteArray(byte[] ByteArray)
         {
             BitmapImage bitmap = new();
@@ -165,8 +200,16 @@ namespace ProjectBOX.ItemsWindowForms.EditingItemForm
             return bitmap;
         }
 
+        /// <summary>
+        /// Метод обновления картинки на экране
+        /// </summary>
+        /// <param name="imgByteArray"></param>
         private void SetImage(byte[] imgByteArray) => ImageOnBorder = CreateBitMapImageFromByteArray(imgByteArray);
 
+        /// <summary>
+        /// Установка первичных значений из БД
+        /// </summary>
+        /// <param name="ItemData">Item из БД</param>
         private void SetStartZnachFromDB(ObjectDatum ItemData)
         {
             ItemName = ItemData.ObjectName;

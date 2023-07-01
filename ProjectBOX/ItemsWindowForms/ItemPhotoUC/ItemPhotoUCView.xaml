@@ -7,11 +7,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="310" d:DesignWidth="340" Background="White">
     <UserControl.Resources>
+        <!--Стиль пути к файлу-->
         <Style x:Key="TextBlockNearButtonTextBlockStyle" TargetType="TextBlock">
             <Setter Property="Margin" Value="10 0 5 0"></Setter>
             <Setter Property="FontFamily" Value="Inter"></Setter>
             <Setter Property="FontSize" Value="14"></Setter>
         </Style>
+        <!--Стиль кнопки обзора-->
         <Style x:Key="ObserverButton" TargetType ="Button">
             <Setter Property="Background" Value="#36638D"></Setter>
             <Setter Property="BorderThickness" Value="0"></Setter>
@@ -37,7 +39,9 @@
             <RowDefinition Height="270"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
         </Grid.RowDefinitions>
+        <!--DataContext-->
         <local:ItemPhotoUCViewModel x:Name="DC" Image="{Binding ByteArrayFormOfImage, ElementName=MainUserControl, Mode=TwoWay}"></local:ItemPhotoUCViewModel>
+        <!--Картинка-->
         <Border Height="270" Width="300" BorderThickness="1" BorderBrush="#36638D" HorizontalAlignment="Left">
             <Image Name="Photo" HorizontalAlignment="Left" Source="{Binding ImageOnBorder, Mode=OneWay}">
             </Image>
@@ -47,6 +51,7 @@
                 <ColumnDefinition Width="230"></ColumnDefinition>
                 <ColumnDefinition Width="70"></ColumnDefinition>
             </Grid.ColumnDefinitions>
+            <!--Путь к файлу-->
             <Border Grid.Column="0"
                     BorderBrush = "#36638D"
                     BorderThickness="1"
@@ -54,6 +59,7 @@
                 <TextBlock Style="{StaticResource TextBlockNearButtonTextBlockStyle}"
                            Text="{Binding FileName}" VerticalAlignment="Center"></TextBlock>
             </Border>
+            <!--Кнопка обзора-->
             <Button Grid.Column="1"
                     Style="{StaticResource ObserverButton}"
                     Command="{Binding ObserverButtonClick}">Обзор</Button>

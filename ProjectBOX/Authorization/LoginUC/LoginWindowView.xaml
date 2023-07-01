@@ -9,7 +9,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="630" d:DesignWidth="500" Background="White">
     <UserControl.Resources>
+        <!--DataContext-->
         <local:LoginWindowViewModel x:Key="DC"></local:LoginWindowViewModel>
+        <!--Стиль поля пароля-->
         <Style x:Key="PasswordField" BasedOn="{StaticResource MainStyleForFields}" TargetType="PasswordBox">
             <Setter Property="Template">
                 <Setter.Value>
@@ -64,11 +66,13 @@
         <StackPanel>
             <TextBlock Text="Вход" Style ="{StaticResource ResourceKey=StyleForMainText}"></TextBlock>
             <StackPanel Margin="0 87 0 0" >
+                <!--Поле логина-->  
                 <StackPanel>
                     <TextBlock Text="Логин" Style="{StaticResource ResourceKey=StyleForHeaderOfFields}" Margin="0,0,0,12"></TextBlock>
                     <Watermarks:WaterMarkTextBox Text="{Binding Login, Mode=TwoWay}" Style="{StaticResource LoginField}">
                     </Watermarks:WaterMarkTextBox>
                 </StackPanel>
+                <!--Поле пароля-->
                 <StackPanel Margin = "0 39 0 0">
                     <TextBlock Text="Пароль" Style="{StaticResource ResourceKey=StyleForHeaderOfFields}" Margin="0,0,0,12"></TextBlock>
                     <PasswordBox Style="{StaticResource PasswordField}">
@@ -79,6 +83,9 @@
                             </Watermarks:PasswordBoxBehaviorForLogin>
                         </i:Interaction.Behaviors>
                     </PasswordBox>
+                </StackPanel>
+                <!--Кнопка войти и гиперссылка-->
+                <StackPanel>
                     <Button Command="{Binding LoginCommand}" Margin="0 175 0 0" Style="{StaticResource MainButton}">Войти</Button>
                     <ContentControl Margin="0 15 0 0" HorizontalAlignment="Center">
                         <Hyperlink Command="{Binding HyperLinkClick, ElementName=userControl}">У вас нет аккаунта?</Hyperlink>

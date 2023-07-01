@@ -9,7 +9,9 @@
         mc:Ignorable="d" WindowState="Maximized"
         Title="Authorization" Height="1080" Width="1920">
     <Window.Resources>
+        <!--DataContext-->
         <local:AuthorizationViewModel x:Key ="DCA" CurrentScreen="Login"></local:AuthorizationViewModel>
+        <!--Стиль Login UserControl-->
         <Style x:Key = "StyleForLoginUC" TargetType="LoginWindow:LoginWindowView">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding CurrentScreen}" Value="Login">
@@ -22,6 +24,7 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+        <!--Стиль Registration UserControl-->
         <Style x:Key = "StyleForRegistrationUC" TargetType="RegistrationWindow:RegistrationWindowView">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding CurrentScreen}" Value="Registration">
@@ -36,6 +39,7 @@
         </Style>
     </Window.Resources>
     <Grid DataContext="{StaticResource DCA}">
+        <!--Фон окна-->
         <Grid.Background>
             <ImageBrush ImageSource="/Pictures/AuthorizationBackground.png" Stretch="UniformToFill"></ImageBrush>
         </Grid.Background>
@@ -49,15 +53,18 @@
             <RowDefinition Height ="720"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
+        <!--Основная зона-->
         <Border Grid.Column ="1" Grid.Row="1" Background="White" CornerRadius="10,10,10,10" Height="720">
             <Border.Effect>
                 <DropShadowEffect Opacity="0.25" RenderingBias="Quality"/>
             </Border.Effect>
             <ContentControl Margin="70,51,70,42">
                 <Grid>
+                    <!--Login UserControl-->
                     <LoginWindow:LoginWindowView HyperLinkClick="{Binding LoginSwap}"
                                                  Style="{StaticResource StyleForLoginUC}">
                     </LoginWindow:LoginWindowView>
+                    <!--Registration UserControl-->
                     <RegistrationWindow:RegistrationWindowView HyperLinkClick="{Binding RegistrationSwap}"
                                                                Style="{StaticResource StyleForRegistrationUC}">
                     </RegistrationWindow:RegistrationWindowView>

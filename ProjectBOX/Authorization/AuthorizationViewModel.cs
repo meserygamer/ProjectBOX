@@ -12,9 +12,11 @@ namespace ProjectBOX.Authorization
 {
     class AuthorizationViewModel : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Обработка переключения на регистрацию из авторизации
+        /// </summary>
+        #region Public RelayCommand RegistrationSwap
         private RelayCommand _registrationSwap;
-        private RelayCommand _loginSwap;
-        private AuthorizationScreens _currentScreen;
 
         public RelayCommand RegistrationSwap
         {
@@ -28,6 +30,13 @@ namespace ProjectBOX.Authorization
                   }));
             }
         }
+        #endregion
+
+        /// <summary>
+        /// Обработка переключения на авторизацию из регистрации
+        /// </summary>
+        #region Public RelayCommand LoginSwap
+        private RelayCommand _loginSwap;
 
         public RelayCommand LoginSwap
         {
@@ -41,6 +50,13 @@ namespace ProjectBOX.Authorization
                   }));
             }
         }
+        #endregion
+
+        /// <summary>
+        /// Текущее состояние окна входа
+        /// </summary>
+        #region Public AuthorizationScreens CurrentScreen
+        private AuthorizationScreens _currentScreen;
 
         public AuthorizationScreens CurrentScreen
         {
@@ -51,19 +67,24 @@ namespace ProjectBOX.Authorization
                 OnPropertyChanged("CurrentScreen");
             }
         }
+        #endregion
 
+        #region INotifyPropertyChanged Realize
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
+        #endregion
     }
 
+    /// <summary>
+    /// Режимы окна входа в систему
+    /// </summary>
     public enum AuthorizationScreens
     {
         Login,
         Registration
     }
-
 }

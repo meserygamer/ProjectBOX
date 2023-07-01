@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -179,7 +180,11 @@ namespace ProjectBOX.ItemsWindow
                 return _createContainerClick ??
                   (_createContainerClick = new RelayCommand(obj =>
                   {
-                      (new CreateContainerFormView()).ShowDialog();
+                      if((new CreateContainerFormView()).ShowDialog() == true)
+                      {
+                          ReloadCategoriesAsync(2);
+                      }
+                      
                   }));
             }
         }
@@ -197,7 +202,11 @@ namespace ProjectBOX.ItemsWindow
                 return _createNewItemClick ??
                   (_createNewItemClick = new RelayCommand(obj =>
                   {
-                      (new CreateItemFormView()).ShowDialog();
+                      if((new CreateItemFormView()).ShowDialog() == true)
+                      {
+                          if (UserChoseSeeAllObject) ReloadItemsList(2);
+                          else ReloadItemsList((ContainerDatum)Category, 2);
+                      }
                   }));
             }
         }
@@ -215,7 +224,11 @@ namespace ProjectBOX.ItemsWindow
                 return _createMovementClick ??
                   (_createMovementClick = new RelayCommand(obj =>
                   {
-                      (new CreateItemMoveFormView()).ShowDialog();
+                      if((new CreateItemMoveFormView()).ShowDialog() == true)
+                      {
+                          if (UserChoseSeeAllObject) ReloadItemsList(2);
+                          else ReloadItemsList((ContainerDatum)Category, 2);
+                      }
                   }));
             }
         }
@@ -245,6 +258,7 @@ namespace ProjectBOX.ItemsWindow
         {
             SetUserAreaData();
             ReloadCategoriesAsync();
+            UserClickOnSeeAllObjectButton.Execute("");
         }
 
         /// <summary>
@@ -271,23 +285,35 @@ namespace ProjectBOX.ItemsWindow
         /// <summary>
         /// Перезагрузка списка категорий с сервера
         /// </summary>
-        private async void ReloadCategoriesAsync()
+        private async void ReloadCategoriesAsync(int Mode = 1)
         {
-            await Task.Run(() => {CategoriesList = ItemsWindowModel.GetItemsWindowModel().GetAllContainerFromDB();});
+            await Task.Run(() => 
+            {
+                if(Mode != 1) Thread.Sleep(1000);
+                CategoriesList = ItemsWindowModel.GetItemsWindowModel().GetAllContainerFromDB();
+            });
         }
 
         /// <summary>
         /// Методы загрузки списка предметов с сервера
         /// </summary>
         #region ReloadItemsList async void
-        private async void ReloadItemsList()
+        private async void ReloadItemsList(int mode = 1)
         {
-            await Task.Run(() => { ItemsList = ItemsWindowModel.GetItemsWindowModel().GetAllItemsFromCategory();});
+            await Task.Run(() => 
+            {
+                if(mode != 1) Thread.Sleep(1000);
+                ItemsList = ItemsWindowModel.GetItemsWindowModel().GetAllItemsFromCategory();
+            });
         }
 
-        private async void ReloadItemsList(ContainerDatum container)
+        private async void ReloadItemsList(ContainerDatum container, int mode = 1)
         {
-            await Task.Run(() => { ItemsList = ItemsWindowModel.GetItemsWindowModel().GetAllItemsFromCategory(container); });
+            await Task.Run(() => 
+            {
+                if (mode != 1) Thread.Sleep(1000);
+                ItemsList = ItemsWindowModel.GetItemsWindowModel().GetAllItemsFromCategory(container);
+            });
         }
         #endregion
 

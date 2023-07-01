@@ -85,11 +85,11 @@ namespace ProjectBOX.ItemsWindowForms.DateTimeUC
         /// <summary>
         /// Часы для Combobox
         /// </summary>
-        public ObservableCollection<int> Hours {get; } = new ObservableCollection<int>(Enumerable.Range(0, 23));
+        public ObservableCollection<int> Hours {get; } = new ObservableCollection<int>(Enumerable.Range(0, 24));
         /// <summary>
         /// Минуты для Combobox
         /// </summary>
-        public ObservableCollection<int> Minutes {get; } = new ObservableCollection<int>(Enumerable.Range(0, 59));
+        public ObservableCollection<int> Minutes {get; } = new ObservableCollection<int>(Enumerable.Range(0, 60));
 
         /// <summary>
         /// Метод обновления даты-времени в формате Date-Time

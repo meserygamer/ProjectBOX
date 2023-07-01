@@ -44,6 +44,20 @@ namespace ProjectBOX.ItemsWindowForms.CreateContainerForm
         }
 
         /// <summary>
+        /// Проверка на уникальность контейнера
+        /// </summary>
+        /// <returns>Экземпляр валидатора</returns>
+        public Validator CheckOnUnique()
+        {
+            using (ProjectBoxDbContext DB = new())
+            {
+                if(DB.ContainerData.Where(a => a.ContainerName == _containerName).Count() != 0)
+                    _isValid = false;
+            }
+            return this;
+        }
+
+        /// <summary>
         /// Валидация
         /// </summary>
         /// <returns>Результат валидации</returns>

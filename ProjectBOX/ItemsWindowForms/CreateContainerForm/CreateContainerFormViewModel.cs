@@ -1,4 +1,5 @@
-﻿using ProjectBOX.ItemsWindowForms.EditingItemForm;
+﻿using ProjectBOX.ItemsWindow;
+using ProjectBOX.ItemsWindowForms.EditingItemForm;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -57,16 +58,16 @@ namespace ProjectBOX.ItemsWindowForms.CreateContainerForm
                 return _createCategoryClick ??
                   (_createCategoryClick = new RelayCommand(obj =>
                   {
-                      if (new Validator(_categoryName).CheckItemNameOnEmpty().Validation())
+                      if (new Validator(_categoryName).CheckItemNameOnEmpty().CheckOnUnique().Validation())
                       {
                           CreateContainerFormInteractionWithDataBase.GetExemplar().CategoryName = _categoryName;
                           CreateContainerFormInteractionWithDataBase.GetExemplar().CategoryDescription = _categoryDescription;
                           CreateContainerFormInteractionWithDataBase.GetExemplar().AddCategoryInDataBaseAsync();
-                          ((CreateContainerFormView)Application.Current.Windows[Application.Current.Windows.Count - 1]).DialogResult = true; ///
+                          (Application.Current.Windows.OfType<CreateContainerFormView>().FirstOrDefault()).DialogResult = true; ///
                       }
                       else
                       {
-                          MessageBox.Show("Поле названия контейнера - пустое, контейнер не добавлен");
+                          MessageBox.Show("Поле названия контейнера - пустое или не уникальное, контейнер не добавлен");
                       }
                   }));
             }

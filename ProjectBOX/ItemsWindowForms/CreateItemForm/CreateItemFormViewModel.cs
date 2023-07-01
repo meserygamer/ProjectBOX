@@ -81,7 +81,7 @@ namespace ProjectBOX.ItemsWindowForms.CreateItemForm
                       if(new Validator(_itemName).CheckItemNameOnEmpty().Validation())
                       {
                           (new CreateItemFormDataBase(ItemName, ItemDescription, ImageByteArray)).AddItemInDataBaseAsync();
-                          ((CreateItemFormView)Application.Current.Windows[Application.Current.Windows.Count - 1]).DialogResult = true; ///
+                          (Application.Current.Windows.OfType<CreateItemFormView>().FirstOrDefault()).DialogResult = true; ///
                       }
                       else
                       {

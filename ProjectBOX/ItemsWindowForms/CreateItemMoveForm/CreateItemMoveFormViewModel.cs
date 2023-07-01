@@ -89,7 +89,7 @@ namespace ProjectBOX.ItemsWindowForms.CreateItemMoveForm
                       (CreateItemMoveFormInteractionWithDB.GetExampler()).AddMovementInDataBase(UserDateTime,
                           (int)Application.Current.Resources["UserID"], (int)Application.Current.Resources["SelectedContainerID"],
                           MovementDescription, ListOfMovedItems);
-                      ((CreateItemMoveFormView)Application.Current.Windows[Application.Current.Windows.Count - 1]).DialogResult = true; ///
+                      (Application.Current.Windows.OfType<CreateItemMoveFormView>().FirstOrDefault()).DialogResult = true; ///
                   }));
             }
         }

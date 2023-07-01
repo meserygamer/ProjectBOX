@@ -140,7 +140,7 @@ namespace ProjectBOX.ItemsWindowForms.EditingItemForm
                       if (new Validator(ItemName).CheckItemNameOnEmpty().Validation())
                       {
                           _editingItemFormModel.ChangeDataAboutItemInDBAsync(ItemName, ItemDescription, ItemImage);
-                          ((EditingItemFormView)Application.Current.Windows[Application.Current.Windows.Count - 1]).DialogResult = true; ///
+                          (Application.Current.Windows.OfType<EditingItemFormView>().FirstOrDefault()).DialogResult = true; ///
                       }
                       else
                       {

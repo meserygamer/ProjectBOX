@@ -1,9 +1,11 @@
-﻿using ProjectBOX.EntityFrameworkModelFiles;
+﻿using Microsoft.VisualBasic;
+using ProjectBOX.EntityFrameworkModelFiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ProjectBOX.ItemsWindowForms.CreateItemForm
 {
@@ -92,9 +94,15 @@ namespace ProjectBOX.ItemsWindowForms.CreateItemForm
                 datum.ObjectName = _itemName;
                 datum.Description = _itemDescription;
                 datum.Image = _image;
+                datum.HistoryOfChangesObjectLocations = new List<HistoryOfChangesObjectLocation>();
                 using (ProjectBoxDbContext DB = new ProjectBoxDbContext())
                 {
                     DB.Add(datum);
+                    if (DB.ContainerData.Count() > 0)
+                    {
+                        datum.HistoryOfChangesObjectLocations.Add(new HistoryOfChangesObjectLocation { Object = datum,
+                            ContainerId = 1, Description = "CreateMove", UserId = (int)Application.Current.Resources["UserID"], ChangesDate = DateTime.Now}) ;
+                    }
                     DB.SaveChanges();
                 }
             });

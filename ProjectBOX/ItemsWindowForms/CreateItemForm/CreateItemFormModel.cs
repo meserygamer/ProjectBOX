@@ -7,16 +7,33 @@ using System.Threading.Tasks;
 
 namespace ProjectBOX.ItemsWindowForms.CreateItemForm
 {
+    /// <summary>
+    /// Валидатор создания объекта
+    /// </summary>
     public class Validator
     {
+        /// <summary>
+        /// Название предмета
+        /// </summary>
         private string _itemName;
+        /// <summary>
+        /// Состояние валидатора
+        /// </summary>
         private bool _isValid = true;
 
+        /// <summary>
+        /// Конструктор валидатора
+        /// </summary>
+        /// <param name="itemName">Название имени предмета</param>
         public Validator(string? itemName)
         {
             _itemName = itemName ?? "";
         }
 
+        /// <summary>
+        /// Проверка имени на пустоту
+        /// </summary>
+        /// <returns>Экземпляр валидатора</returns>
         public Validator CheckItemNameOnEmpty()
         {
             if(_itemName.Length == 0)
@@ -26,15 +43,37 @@ namespace ProjectBOX.ItemsWindowForms.CreateItemForm
             return this;
         }
 
+        /// <summary>
+        /// Валидация
+        /// </summary>
+        /// <returns>Состояние валидатора</returns>
         public bool Validation() => _isValid;
     }
 
+    /// <summary>
+    /// Класс взаимодействия с базой
+    /// </summary>
     public class CreateItemFormDataBase
     {
+        /// <summary>
+        /// Название предмета
+        /// </summary>
         private string _itemName;
+        /// <summary>
+        /// Описание предмета
+        /// </summary>
         private string _itemDescription;
+        /// <summary>
+        /// Картинка
+        /// </summary>
         private byte[] _image;
 
+        /// <summary>
+        /// Конструктор класса
+        /// </summary>
+        /// <param name="itemName">Название предмета</param>
+        /// <param name="itemDescription">Описание предмета</param>
+        /// <param name="image">Картинка</param>
         public CreateItemFormDataBase(string itemName, string itemDescription, byte[] image)
         {
             _image = image;
@@ -42,6 +81,9 @@ namespace ProjectBOX.ItemsWindowForms.CreateItemForm
             _itemDescription = itemDescription;
         }
 
+        /// <summary>
+        /// Добавление предмета в базу
+        /// </summary>
         public async void AddItemInDataBaseAsync()
         {
             await Task.Run(() =>

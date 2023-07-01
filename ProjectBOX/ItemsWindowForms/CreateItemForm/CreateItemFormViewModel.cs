@@ -14,11 +14,11 @@ namespace ProjectBOX.ItemsWindowForms.CreateItemForm
 {
     class CreateItemFormViewModel : INotifyPropertyChanged
     {
-
+        /// <summary>
+        /// Название предмета
+        /// </summary>
+        #region public string ItemName
         private string _itemName;
-        private string _itemDescription;
-        private byte[] _imageByteArray;
-        private RelayCommand _createItem;
 
         public string ItemName
         {
@@ -29,6 +29,13 @@ namespace ProjectBOX.ItemsWindowForms.CreateItemForm
                 OnPropertyChanged("ItemName");
             }
         }
+        #endregion
+
+        /// <summary>
+        /// Описание предмета
+        /// </summary>
+        #region public string ItemDescription
+        private string _itemDescription;
 
         public string ItemDescription
         {
@@ -39,6 +46,13 @@ namespace ProjectBOX.ItemsWindowForms.CreateItemForm
                 OnPropertyChanged("ItemDescription");
             }
         }
+        #endregion
+
+        /// <summary>
+        /// байтовое представление картинки
+        /// </summary>
+        #region public byte[] ImageByteArray
+        private byte[] _imageByteArray;
 
         public byte[] ImageByteArray
         {
@@ -49,6 +63,13 @@ namespace ProjectBOX.ItemsWindowForms.CreateItemForm
                 OnPropertyChanged("ImageByteArray");
             }
         }
+        #endregion
+
+        /// <summary>
+        /// Обработчик кнопки создания объекта
+        /// </summary>
+        #region public RelayCommand CreateItem
+        private RelayCommand _createItem;
 
         public RelayCommand CreateItem
         {
@@ -69,12 +90,15 @@ namespace ProjectBOX.ItemsWindowForms.CreateItemForm
                   }));
             }
         }
+        #endregion
 
+        #region INotifyPropertyChanged Realize
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
+        #endregion
     }
 }

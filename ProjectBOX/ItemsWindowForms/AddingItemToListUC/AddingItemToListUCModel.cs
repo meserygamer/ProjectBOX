@@ -10,13 +10,34 @@ namespace ProjectBOX.ItemsWindowForms.AddingItemToListUC
 {
     public class AddingItemToListInteractionsWithDataBase
     {
+        #region SingletonPattern
         private static AddingItemToListInteractionsWithDataBase _singleton;
-
-        public delegate void ListWasFormed(ObservableCollection<ObjectDatum> List);
-        public event ListWasFormed ItemsListWasFormed;
 
         private AddingItemToListInteractionsWithDataBase() { }
 
+        public static AddingItemToListInteractionsWithDataBase GetExampler()
+        {
+            if (_singleton is null)
+                return _singleton = new AddingItemToListInteractionsWithDataBase();
+            return _singleton;
+        }
+        #endregion
+
+        /// <summary>
+        /// Событие формирования списка предметов из БД
+        /// </summary>
+        #region public event ListWasFormed ItemsListWasFormed
+        public event ListWasFormed ItemsListWasFormed;
+        /// <summary>
+        /// Делегат ивента о формировании списка предметов из БД
+        /// </summary>
+        /// <param name="List">Список предметов</param>
+        public delegate void ListWasFormed(ObservableCollection<ObjectDatum> List);
+        #endregion
+
+        /// <summary>
+        /// Получение списка предметов из БД
+        /// </summary>
         public async void FormedListOfAllItemsAsync()
         {
             ObservableCollection<ObjectDatum> ListOfAllItems;
@@ -28,13 +49,6 @@ namespace ProjectBOX.ItemsWindowForms.AddingItemToListUC
                 }
                 ItemsListWasFormed(ListOfAllItems);
             });
-        }
-
-        public static AddingItemToListInteractionsWithDataBase GetExampler()
-        {
-            if(_singleton is null) 
-                return _singleton = new AddingItemToListInteractionsWithDataBase();
-            return _singleton;
         }
     }
 }

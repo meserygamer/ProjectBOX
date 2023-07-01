@@ -293,7 +293,9 @@
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="260"></RowDefinition>
         </Grid.RowDefinitions>
+        <!--DataContext-->
         <local:AddingItemToListUCViewModel x:Name="DC" ListOfMovedItems="{Binding ListOfSelectedItemsOnMove, ElementName=userControl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></local:AddingItemToListUCViewModel>
+        <!--Область ввода названия предмета-->
         <Grid Height="40" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="375"></ColumnDefinition>
@@ -317,6 +319,7 @@
             </ComboBox>
             <Button Grid.Column="1" Style="{StaticResource AddButton}" Command="{Binding ClickOnAddButton}">Добавить</Button>
         </Grid>
+        <!--Список предметов-->
         <DataGrid Grid.Row ="1"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"

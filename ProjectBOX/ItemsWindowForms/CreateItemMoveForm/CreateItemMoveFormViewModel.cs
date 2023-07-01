@@ -16,7 +16,10 @@ namespace ProjectBOX.ItemsWindowForms.CreateItemMoveForm
 {
     public class CreateItemMoveFormViewModel : DependencyObject, INotifyPropertyChanged
     {
-        #region UserDateTime DateTime
+        /// <summary>
+        /// Дата-время выбранное пользователем
+        /// </summary>
+        #region public DateTime UserDateTime
         private DateTime _userDateTime;
 
         public DateTime UserDateTime
@@ -28,7 +31,10 @@ namespace ProjectBOX.ItemsWindowForms.CreateItemMoveForm
             }
         }
         #endregion
-        #region MovementDescription string
+        /// <summary>
+        /// Описание перемещения
+        /// </summary>
+        #region public string MovementDescription
         private string _movementDescription;
 
         public string MovementDescription
@@ -42,7 +48,10 @@ namespace ProjectBOX.ItemsWindowForms.CreateItemMoveForm
         }
         #endregion
 
-        #region ListOfMovedItems ObservableCollection<ObjectDatum> DependencyProperty
+        /// <summary>
+        /// Список перемещаемых предметов
+        /// </summary>
+        #region public ObservableCollection<ObjectDatum> ListOfMovedItems DependencyProperty
         public static readonly DependencyProperty ListOfMovedItemsProperty =
             DependencyProperty.Register("ListOfMovedItems", typeof(ObservableCollection<ObjectDatum>), typeof(CreateItemMoveFormViewModel));
 
@@ -53,7 +62,10 @@ namespace ProjectBOX.ItemsWindowForms.CreateItemMoveForm
         }
         #endregion
 
-        #region ClickOnCreateMoveButton RelayCommand
+        /// <summary>
+        /// Обработчик создания перемещения
+        /// </summary>
+        #region public RelayCommand ClickOnCreateMoveButton
         private RelayCommand _clickOnCreateMoveButton;
 
         public RelayCommand ClickOnCreateMoveButton

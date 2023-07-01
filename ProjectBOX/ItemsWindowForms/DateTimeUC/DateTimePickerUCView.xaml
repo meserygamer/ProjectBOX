@@ -430,7 +430,9 @@
             <ColumnDefinition Width="120"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <!--DataContext-->
         <local:DateTimePickerUCViewModel x:Name = "DT" CurrentDateTime="{Binding CurrentDateTime, ElementName=UserControlDatePicker, Mode=OneWayToSource}"/>
+        <!--Выбор даты-->
         <Border BorderBrush="#36638D" BorderThickness ="1" CornerRadius="10">
             <DatePicker Style="{DynamicResource DatePickerStyle1}"
                         BorderThickness="0"
@@ -444,6 +446,7 @@
                 <ColumnDefinition Width ="auto"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
+            <!--Выбор часа-->
             <ComboBox  Style="{DynamicResource ComboBoxStyle1}"
                        VerticalAlignment="Center"
                        Height="40"
@@ -452,6 +455,7 @@
                        ItemsSource="{Binding Hours}"
                        SelectedValue="{Binding SelectedHours, Mode=TwoWay}"/>
             <TextBlock Grid.Column ="1" VerticalAlignment="Center" FontSize="20" Margin="5,0,5,0">:</TextBlock>
+            <!--Выбор количества минут-->
             <ComboBox Style="{DynamicResource ComboBoxStyle1}"
                       VerticalAlignment="Center"
                       Height="40"

@@ -13,7 +13,10 @@ namespace ProjectBOX.ItemsWindowForms.DateTimeUC
 {
     public class DateTimePickerUCViewModel : FrameworkElement, INotifyPropertyChanged
     {
-        #region Date string
+        /// <summary>
+        /// Дата выбранная пользователем
+        /// </summary>
+        #region public string Date
         private string _date;
 
         public string Date
@@ -26,7 +29,10 @@ namespace ProjectBOX.ItemsWindowForms.DateTimeUC
             }
         }
         #endregion
-        #region SelectedMinutes int?
+        /// <summary>
+        /// Количество минут выбранное пользователем
+        /// </summary>
+        #region public int? SelectedMinutes
         private int? _selectedMinutes;
 
         public int? SelectedMinutes
@@ -40,7 +46,10 @@ namespace ProjectBOX.ItemsWindowForms.DateTimeUC
             }
         }
         #endregion
-        #region SelectedHours int?
+        /// <summary>
+        /// Количество часов выбранное пользователем
+        /// </summary>
+        #region public int? SelectedHours
         private int? _selectedHours;
 
         public int? SelectedHours
@@ -54,19 +63,11 @@ namespace ProjectBOX.ItemsWindowForms.DateTimeUC
             }
         }
         #endregion
-        //#region CurrentDateTime DateTime
-        //private DateTime _currentDateTime;
 
-        //public DateTime CurrentDateTime
-        //{
-        //    get { return _currentDateTime; }
-        //    set {
-        //        _currentDateTime = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
-        //#endregion
-        #region CurrentDateTime DateTime DependencyProperty
+        /// <summary>
+        /// Выбранная дата-время в формате DateTime
+        /// </summary>
+        #region public DateTime CurrentDateTime DependencyProperty
         public static readonly DependencyProperty CurrentDateTimeProperty;
 
         static DateTimePickerUCViewModel()
@@ -81,9 +82,18 @@ namespace ProjectBOX.ItemsWindowForms.DateTimeUC
         }
         #endregion
 
+        /// <summary>
+        /// Часы для Combobox
+        /// </summary>
         public ObservableCollection<int> Hours {get; } = new ObservableCollection<int>(Enumerable.Range(0, 23));
-        public ObservableCollection<int> Minutes {get; } = new ObservableCollection<int>(Enumerable.Range(0, 60));
+        /// <summary>
+        /// Минуты для Combobox
+        /// </summary>
+        public ObservableCollection<int> Minutes {get; } = new ObservableCollection<int>(Enumerable.Range(0, 59));
 
+        /// <summary>
+        /// Метод обновления даты-времени в формате Date-Time
+        /// </summary>
         private void UpdateDateTime()
         {
             if(Date is not null && Date != "" && SelectedHours is not null && SelectedMinutes is not null)

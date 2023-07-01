@@ -25,8 +25,10 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="110"></RowDefinition>
         </Grid.RowDefinitions>
+        <!--Заголовок-->
         <TextBlock Style="{StaticResource MainLabelTextBlockStyle}"
                    Grid.Row="0">Перемещение предметов</TextBlock>
+        <!--Дата-время UserControl-->
         <Grid Grid.Row = "1">
             <Grid.RowDefinitions>
                 <RowDefinition Height ="auto"></RowDefinition>
@@ -38,6 +40,7 @@
                 <DateTimePicker:DateTimePickerUCView CurrentDateTime="{Binding DataContext.UserDateTime, ElementName=window, Mode=OneWayToSource}" ></DateTimePicker:DateTimePickerUCView>
             </ContentControl>
         </Grid>
+        <!--Описание перемещения-->
         <Grid Grid.Row = "2">
             <Grid.RowDefinitions>
                 <RowDefinition Height ="auto"></RowDefinition>
@@ -55,6 +58,7 @@
                          WatermarkText="Введите описание перемещения..."
                 Text="{Binding MovementDescription, Mode=TwoWay}"></Watermarks:WaterMarkTextBox>
         </Grid>
+        <!--Список перемещаемых предметов-->
         <Grid Grid.Row = "3">
             <Grid.RowDefinitions>
                 <RowDefinition Height ="auto"></RowDefinition>
@@ -66,6 +70,7 @@
                 <ListOfTransportingItems:AddingItemToListUCView ListOfSelectedItemsOnMove="{Binding DataContext.ListOfMovedItems, ElementName=window, Mode=TwoWay}" ></ListOfTransportingItems:AddingItemToListUCView>
             </ContentControl>
         </Grid>
+        <!--Кнопка перемещения-->
         <Button Grid.Row="4"
                 Width="350" Height="60"
                 Style="{StaticResource ConfirmButtonStyle}"

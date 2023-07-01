@@ -14,20 +14,10 @@ namespace ProjectBOX.ItemsWindowForms.AddingItemToListUC
 {
     public class AddingItemToListUCViewModel : FrameworkElement, INotifyPropertyChanged
     {
-        #region ListOfMovedItems ObservableCollection<ObjectDatum>
-        //private ObservableCollection<ObjectDatum> _listOfMovedItems = new ObservableCollection<ObjectDatum>();
-
-        //public ObservableCollection<ObjectDatum> ListOfMovedItems
-        //{
-        //    get { return _listOfMovedItems; }
-        //    set { 
-        //        _listOfMovedItems = value;
-        //        OnPropertyChanged("ListOfMovedItems");
-        //    }
-        //}
-        #endregion
-
-        #region ListOfMovedItems ObservableCollection<ObjectDatum> DependencyProperty
+        /// <summary>
+        /// Список перемещаемых предметов
+        /// </summary>
+        #region public ObservableCollection<ObjectDatum> ListOfMovedItems DependencyProperty
         public static readonly DependencyProperty ListOfMovedItemsProperty =
             DependencyProperty.Register("ListOfMovedItems", typeof(ObservableCollection<ObjectDatum>), typeof(AddingItemToListUCViewModel));
 
@@ -38,7 +28,10 @@ namespace ProjectBOX.ItemsWindowForms.AddingItemToListUC
         }
         #endregion
 
-        #region ListOfAllItems ObservableCollection<ObjectDatum>
+        /// <summary>
+        /// Список всех предметов
+        /// </summary>
+        #region public ObservableCollection<ObjectDatum> ListOfAllItems
         private ObservableCollection<ObjectDatum> _listOfAllItems;
 
         public ObservableCollection<ObjectDatum> ListOfAllItems
@@ -52,7 +45,10 @@ namespace ProjectBOX.ItemsWindowForms.AddingItemToListUC
         }
         #endregion
 
-        #region SelectedItem ObjectDatum?
+        /// <summary>
+        /// Введенный предмет
+        /// </summary>
+        #region public ObjectDatum? SelectedItem
         private ObjectDatum? _selectedItem;
 
         public ObjectDatum? SelectedItem
@@ -66,7 +62,10 @@ namespace ProjectBOX.ItemsWindowForms.AddingItemToListUC
         }
         #endregion
 
-        #region ClickOnAddButton RelayCommand
+        /// <summary>
+        /// Обработчик кнопки "Добавить предмет"
+        /// </summary>
+        #region public RelayCommand ClickOnAddButton
         private RelayCommand _clickOnAddButton;
 
         public RelayCommand ClickOnAddButton
@@ -93,6 +92,10 @@ namespace ProjectBOX.ItemsWindowForms.AddingItemToListUC
             AddingItemToListInteractionsWithDataBase.GetExampler().FormedListOfAllItemsAsync();
         }
 
+        /// <summary>
+        /// Заполнение списка предметов
+        /// </summary>
+        /// <param name="ListOfAllItemsFromDB">список из предметов БД</param>
         private void FilingListOfAllItems(ObservableCollection<ObjectDatum> ListOfAllItemsFromDB) => ListOfAllItems = ListOfAllItemsFromDB;
 
         #region INotifyPropertyChanged Realize

@@ -18,7 +18,10 @@ namespace ProjectBOX.ItemsWindow
 {
     public class ItemsWindowViewModel : INotifyPropertyChanged
     {
-        #region UserChoseSeeAllObject bool
+        /// <summary>
+        /// Находится ли список в состоянии просмотра всех предметов
+        /// </summary>
+        #region public bool UserChoseSeeAllObject
         private bool _userChoseSeeAllObject;
 
         public bool UserChoseSeeAllObject
@@ -36,7 +39,10 @@ namespace ProjectBOX.ItemsWindow
             }
         }
         #endregion
-        #region Category object?
+        /// <summary>
+        /// Выбранный пользователем контейнер
+        /// </summary>
+        #region public object? Category
         private object? _category;
 
         public object? Category
@@ -55,7 +61,10 @@ namespace ProjectBOX.ItemsWindow
             }
         }
         #endregion
-        #region UserName string?
+        /// <summary>
+        /// Имя пользователя
+        /// </summary>
+        #region public string? UserName
         private string? _userName;
 
         public string? UserName
@@ -68,7 +77,10 @@ namespace ProjectBOX.ItemsWindow
             }
         }
         #endregion
-        #region UserEmail string?
+        /// <summary>
+        /// Электронная почта пользователя
+        /// </summary>
+        #region public string? UserEmail
         private string? _userEmail;
 
         public string? UserEmail
@@ -82,7 +94,10 @@ namespace ProjectBOX.ItemsWindow
         }
         #endregion
 
-        #region CategoriesList ObservableCollection<ContainerDatum>
+        /// <summary>
+        /// Список "контейнеров"
+        /// </summary>
+        #region public ObservableCollection<ContainerDatum> CategoriesList
         private ObservableCollection<ContainerDatum> _categoriesList = new ObservableCollection<ContainerDatum>();
 
         public ObservableCollection<ContainerDatum> CategoriesList
@@ -95,7 +110,10 @@ namespace ProjectBOX.ItemsWindow
             }
         }
         #endregion
-        #region ItemsList ObservableCollection<CompleteTask>
+        /// <summary>
+        /// Список предметов
+        /// </summary>
+        #region public ObservableCollection<CompleteTask> ItemsList
         private ObservableCollection<CompleteTask> _itemsList = new ObservableCollection<CompleteTask>();
 
         public ObservableCollection<CompleteTask> ItemsList
@@ -108,7 +126,10 @@ namespace ProjectBOX.ItemsWindow
             }
         }
         #endregion
-        #region SelectedItemInDataGrid CompleteTask
+        /// <summary>
+        /// Выбранный предмет в списке
+        /// </summary>
+        #region public CompleteTask SelectedItemInDataGrid
         private CompleteTask _selectedItemInDataGrid;
 
         public CompleteTask SelectedItemInDataGrid
@@ -127,7 +148,10 @@ namespace ProjectBOX.ItemsWindow
         }
         #endregion
 
-        #region UserClickOnSeeAllObjectButton RelayCommand
+        /// <summary>
+        /// Обработчик при выборе просмотра всех предметов
+        /// </summary>
+        #region public RelayCommand UserClickOnSeeAllObjectButton
         private RelayCommand _userClickOnSeeAllObjectButton;
 
         public RelayCommand UserClickOnSeeAllObjectButton
@@ -142,7 +166,10 @@ namespace ProjectBOX.ItemsWindow
             }
         }
         #endregion
-        #region CreateContainerClick RelayCommand
+        /// <summary>
+        /// Обработчик создания "контейнера"
+        /// </summary>
+        #region public RelayCommand CreateContainerClick
         private RelayCommand _createContainerClick;
 
         public RelayCommand CreateContainerClick
@@ -157,7 +184,10 @@ namespace ProjectBOX.ItemsWindow
             }
         }
         #endregion
-        #region CreateNewItemClick RelayCommand
+        /// <summary>
+        /// Обработчик создания нового предмета
+        /// </summary>
+        #region public RelayCommand CreateNewItemClick
         private RelayCommand _createNewItemClick;
 
         public RelayCommand CreateNewItemClick
@@ -172,7 +202,10 @@ namespace ProjectBOX.ItemsWindow
             }
         }
         #endregion
-        #region CreateMovementClick RelayCommand
+        /// <summary>
+        /// Обработчик создания перемещения
+        /// </summary>
+        #region public RelayCommand CreateMovementClick
         private RelayCommand _createMovementClick;
 
         public RelayCommand CreateMovementClick
@@ -188,6 +221,9 @@ namespace ProjectBOX.ItemsWindow
         }
         #endregion
 
+        /// <summary>
+        /// Методы для работы обводки "контейнеров"
+        /// </summary>
         #region ClearMethodsOfCategoryChose
         private void ClearSelectedCategory()
         {
@@ -202,12 +238,18 @@ namespace ProjectBOX.ItemsWindow
         }
         #endregion
 
+        /// <summary>
+        /// Конструктор ViewModel
+        /// </summary>
         public ItemsWindowViewModel()
         {
             SetUserAreaData();
             ReloadCategoriesAsync();
         }
 
+        /// <summary>
+        /// Набор методов для установления имени пользователя и электр. почты
+        /// </summary>
         #region SetUserDataMethods
         private void SetUserAreaData()
         {
@@ -226,11 +268,17 @@ namespace ProjectBOX.ItemsWindow
         }
         #endregion
 
+        /// <summary>
+        /// Перезагрузка списка категорий с сервера
+        /// </summary>
         private async void ReloadCategoriesAsync()
         {
             await Task.Run(() => {CategoriesList = ItemsWindowModel.GetItemsWindowModel().GetAllContainerFromDB();});
         }
 
+        /// <summary>
+        /// Методы загрузки списка предметов с сервера
+        /// </summary>
         #region ReloadItemsList async void
         private async void ReloadItemsList()
         {
@@ -243,11 +291,13 @@ namespace ProjectBOX.ItemsWindow
         }
         #endregion
 
+        #region INotifyPropertyChanged realize
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
+        #endregion
     }
 }

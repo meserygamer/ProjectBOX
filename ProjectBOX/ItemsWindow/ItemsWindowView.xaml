@@ -17,16 +17,19 @@
         <local:ItemsWindowViewModel></local:ItemsWindowViewModel>
     </Window.DataContext>
     <Window.Resources>
+        <!--Стиль шрифта контейнеров-->
         <Style x:Key="ItemsCategoryFont">
             <Setter Property="TextBlock.FontFamily" Value = "Inter"></Setter>
             <Setter Property="TextBlock.FontSize" Value = "24"></Setter>
         </Style>
+        <!--Стиль границы категории при наведении-->
         <Style x:Key="CatygoryBackgroundBorderStyle" TargetType="Border">
             <Setter Property="Background" Value = "White"></Setter>
             <Setter Property="CornerRadius" Value = "0 10 0 0"></Setter>
             <Setter Property="BorderBrush" Value = "#36638D"></Setter>
             <Setter Property="BorderThickness" Value = "0 1 1 0"></Setter>
         </Style>
+        <!--Стиль всех кнопок в окне, кроме перемещения--> 
         <Style x:Key="StyleForAllButtonOnItemWindow"
                TargetType="Button">
             <Setter Property="FontSize" Value="24"></Setter>
@@ -51,6 +54,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--Стиль кнопки перемещения-->
         <Style x:Key="StyleForCreateMovementButton"
                TargetType="Button"
                BasedOn="{StaticResource StyleForAllButtonOnItemWindow}">
@@ -61,6 +65,7 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+        <!--Стиль контейнера "Показать все предметы"-->
         <Style x:Key="ShowAllObjectsButtonStyle"
                TargetType="Button"
                BasedOn="{StaticResource ItemsCategoryFont}">
@@ -88,6 +93,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--Стиль контейнеров в списке-->
         <Style TargetType="{x:Type ListViewItem}"
                x:Key="CategoryListViewItemStyle">
             <Setter Property="Height" Value="100"></Setter>
@@ -118,6 +124,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--Стиль для перемещения описания на другую строчку-->
         <Style TargetType="{x:Type TextBlock}" x:Key="DataGridCellTextWrap">
             <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
         </Style>
@@ -136,8 +143,10 @@
                 <RowDefinition Height = "30"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
+            <!--Область личного кабинета-->
             <UserAreaUC:UserAreaUCView Email="{Binding UserEmail, Mode=TwoWay}"
                                        NickName="{Binding UserName, Mode=TwoWay}"/>
+            <!--Область списка "контейнеров"-->
             <Border Grid.Row="2" Style="{StaticResource CatygoryBackgroundBorderStyle}">
                 <Grid Margin="0,10,10,15">
                     <Grid.RowDefinitions>

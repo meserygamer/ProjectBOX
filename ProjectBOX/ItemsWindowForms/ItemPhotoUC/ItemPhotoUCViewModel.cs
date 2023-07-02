@@ -68,8 +68,14 @@ namespace ProjectBOX.ItemsWindowForms.ItemPhotoUC
                       OpenFileDialog fileDialog = new OpenFileDialog();
                       fileDialog.ShowDialog();
                       FileName = fileDialog.FileName;
-                      Image = File.ReadAllBytes(FileName);
-                      //ImageOnBorder = CreateBitMapImageFromByteArray(Image);
+                      try
+                      {
+                          Image = File.ReadAllBytes(FileName);
+                      }
+                      catch
+                      {
+                          return;
+                      }
                   }));
             }
         }

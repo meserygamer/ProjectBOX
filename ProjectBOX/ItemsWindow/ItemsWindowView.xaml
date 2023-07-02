@@ -163,14 +163,12 @@
                           StrokeThickness="1"
                           Stroke="Black"
                           HorizontalAlignment="Center"/>
-                    <ScrollViewer Grid.Row="2">
-                        <ListView BorderThickness="0"
+                    <ListView BorderThickness="0" Grid.Row="2"
                                   SelectionMode="Single"
                                   ItemContainerStyle="{StaticResource CategoryListViewItemStyle}"
                                   SelectedItem="{Binding Category}"
                                   ItemsSource="{Binding CategoriesList}">
-                        </ListView>
-                    </ScrollViewer>
+                    </ListView>
                     <Button Grid.Row="3"
                             Margin="0,13,0,0"
                             Width ="350"
@@ -231,6 +229,8 @@
                                   SelectionMode = "Single"
                                   SelectionUnit="FullRow"
                                   AutoGenerateColumns = "False"
+                                  ScrollViewer.CanContentScroll="True"
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto"
                                   SelectedItem="{Binding SelectedItemInDataGrid, Mode=TwoWay}"
                                   ItemsSource="{Binding ItemsList}">
                             <DataGrid.Columns>
